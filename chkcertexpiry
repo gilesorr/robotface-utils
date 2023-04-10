@@ -1,0 +1,274 @@
+#!/bin/bash
+# <|°_°|>
+# shellcheck disable=SC1117
+#     The use of shell colours involves a lot of "\0" so I'm disabling that
+#     linter error (SC1117) for this file.
+#
+# Purpose:
+#     Check TLS certificates for a list of FQDNS.
+
+######################################################################
+#           User settings
+######################################################################
+# If certs expire in less than EXPIRY_ALARM_DAYS, highlight the cert date
+# in the output:
+EXPIRY_ALARM_DAYS=45
+# How long 'curl' waits before giving up on a non-responsive host:
+CURL_TIMEOUT=4
+
+# Set some colours for text output:
+B_RED="\033[1;31m"
+B_GREEN="\033[1;32m"
+B_YELLOW="\033[1;33m"
+NO_COLOUR="\033[0;0m"
+
+# If you find the script too colourful, tweak it more to your liking:
+EXPIRY_COLOUR="${B_YELLOW}"
+HOST_COLOUR="${B_GREEN}"
+WARNING_COLOUR="${B_RED}"
+
+
+######################################################################
+#           List hosts you want tested
+######################################################################
+list-fqdns () {
+    echo "
+        kids.tpl.ca
+        gilesorr.com
+        www.tpl.ca
+        www.google.ca
+        doesnotexist.aabb
+    "
+}
+
+
+######################################################################
+#                        Load <|°_°|> library
+######################################################################
+# Get our library of functions:
+# shellcheck disable=1090 # Can't follow non-constant source
+# shellcheck disable=1091 # Not following ...
+source "$(dirname "${0}")/robotface_utils"
+
+
+######################################################################
+#                        Check for GNU 'date'
+######################################################################
+# There may be a better way to test.  Send a PR if you know it.
+
+# if it barfs on a long option ("--help") assume it's not GNU:
+if date --help > /dev/null 2>&1
+then
+    is_GNU_date="true"
+else
+    is_GNU_date="false"
+fi
+
+
+######################################################################
+#                        Help / Usage
+######################################################################
+
+usage () {
+    # Unlike Python's "argparse," Bash's "getopts" doesn't auto-generate
+    # the help or keep this "usage" output up-to-date: you have to do that.
+    cat << EOF
+Usage:
+    $(basename "${0}") [-h] [-c] [-s]
+
+Check TLS certificate expiry dates across hosts.  Edit the script to change
+the list of hosts ("${0}").
+
+-h            show this help and exit
+-c            show certificate issuer and expiry date for each host
+-s            use System versions of 'curl' and 'openssl' (don't search)
+EOF
+}
+
+
+######################################################################
+#           Print the date of expiry of a site certificate
+######################################################################
+
+dateandissuer () {
+    # "man s_client" or "man x509" to get the documentation for these
+    # openssl subcommands.  '-servername' was added to prevent redirects
+    # from one name to another getting the cert of the redirect domain.
+    sclient_out="$(echo | ${OPENSSL} s_client -connect "${1}:443" -servername "${1}" 2>/dev/null)"
+    ugly_date="$(echo "${sclient_out}" | ${OPENSSL} x509 -noout -dates | grep notAfter | awk 'BEGIN { FS="=" } { print $2 }')"
+    # You would think Ctrl-V-Ctrl-M would work here, but no: we have to
+    # split across two lines (backslash is also required, and watch out for
+    # Vim trying to indent the second line! - should be flush left):
+    # 2020-04 further updated after an 'openssl' update introducing
+    # spaces around the "=" signs, this handles with and without(?).
+    #shellcheck disable=SC1004
+    issuer="$(echo    "${sclient_out}" \
+        | ${OPENSSL} x509 -noout -issuer \
+        | sed -e 's@/@\
+@g' \
+        | sed -e 's@, @\
+@g' \
+        | grep -E '^O ?= ?' \
+        | awk -F "=" '{ print $2 }' \
+        | sed -e 's@^ @@' \
+        )"
+    # 'man strftime' to find more about date formatting
+    # and http://stackoverflow.com/questions/1842634/parse-date-in-bash
+    # 'date' behaves very differently between Mac and GNU 'date', handle
+    # separately.
+    if [[ ${ugly_date} == *"GMT"* ]]
+    then
+        if ${is_GNU_date}
+        then
+            expiry_epoch_seconds=$(date '+%s' -d "${ugly_date}")
+        else # assuming Mac
+            expiry_epoch_seconds=$(date -jf '%b %e %H:%M:%S %Y %Z' "${ugly_date}" "+%s")
+        fi
+        # and we convert to seconds from the Unix Epoch ...
+        now_epoch_seconds=$(date "+%s")
+        ugly_date_sans_time="$(echo "${ugly_date}" | sed -e 's/ [012][0-9]:[0-5][0-9]:[0-5][0-9] /, /' -e 's/ GMT//' )"
+        if [ $(( expiry_epoch_seconds - now_epoch_seconds )) -gt $(( EXPIRY_ALARM_DAYS * 60 * 60 * 24 )) ]
+        then
+            echo -n "${ugly_date_sans_time} "
+        else
+            echo -en "${EXPIRY_COLOUR}${ugly_date_sans_time}${NO_COLOUR} "
+        fi
+        echo "(${issuer})"
+    else
+        echo -e "${WARNING_COLOUR}Date retrieved but not readable${NO_COLOUR} "
+    fi
+}
+
+
+######################################################################
+#                    search certificates
+######################################################################
+
+search() {
+    for host in $( list-fqdns )
+    do
+        # for each host, print the name colourized and then print the
+        # certificate date.  Date will be coloured EXPIRY_COLOUR if the
+        # expiry date is closer than EXPIRY_ALARM_DAYS away.
+        echo -en "Host ${HOST_COLOUR}${host}${NO_COLOUR}: "
+        # we only want curl's return value, send the rest to the trash
+        "${CURL}" -m $CURL_TIMEOUT "https://${host}" > /dev/null 2>&1
+        curlretval=$?
+        # 'man curl' is your friend for return values - at the end of the
+        # document.
+        case ${curlretval} in
+            0|60)
+                # 60: Peer certificate cannot be authenticated with known
+                #     CA certificates (we sometimes get this for sites with
+                #     our certs)
+                # 0: all good
+                dateandissuer "${host}"
+                ;;
+            6) # couldn't resolve host
+                echo -e "${WARNING_COLOUR}Host couldn't be resolved.${NO_COLOUR}"
+                ;;
+            7) # man curl: "Failed to connect to host."
+                echo -e "${WARNING_COLOUR}Unable to connect to host or host doesn't have certificate.${NO_COLOUR}"
+                ;;
+            28) # Operation time-out
+                echo -e "${WARNING_COLOUR}Not a valid SSL/TLS host (time-out)?${NO_COLOUR}"
+                ;;
+            35) # SSL connect error. The SSL handshaking failed.
+                echo -e "${WARNING_COLOUR}SSL handshake failure.${NO_COLOUR}"
+                ;;
+            51) # man curl: "The peer's SSL certificate or SSH MD5
+                # fingerprint was not OK." this seems to occur for a
+                # machine that has a public-facing name that's different
+                # than the one we're trying to call.
+                echo -e "${WARNING_COLOUR}curl dislikes certificate: this name doesn't match public name?${NO_COLOUR}"
+                ;;
+            127) # 'man curl' doesn't list this, but by all appearances ...
+                 # (may happen under other circumstances too):
+                echo -e "${WARNING_COLOUR}malformed 'curl' command ... probably a script problem?${NO_COLOUR}"
+                ;;
+            *)
+                echo -e "${WARNING_COLOUR}don't recognize the curl return value, update the script for '${curlretval}'${NO_COLOUR}"
+                ;;
+        esac
+    done
+    echo -e "Expiries less than ${EXPIRY_ALARM_DAYS} days away have been ${EXPIRY_COLOUR}highlighted${NO_COLOUR} "
+}
+
+
+######################################################################
+#                    Process the command line
+######################################################################
+
+if [ $# -lt 1 ]
+then
+    usage
+    exit 1
+fi
+
+# http://wiki.bash-hackers.org/howto/getopts_tutorial
+while getopts ":hcs" opt
+do
+    case ${opt} in
+        h)
+            usage
+            exit 0
+            ;;
+        c)
+            ;;
+        s)  # use System utilities
+            CURL="/usr/bin/curl"
+            OPENSSL="/usr/bin/openssl"
+            #SYSTEMUTILS="true"
+            ;;
+
+        \?)
+            echo "invalid option: -${OPTARG}" >&2
+            usage
+            exit 1
+            ;;
+        :)
+            # no option currently requires an argument, but this is how to
+            # handle it if that changes.
+            echo "option -${OPTARG} requires an argument." >&2
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+
+######################################################################
+#                    Set the curl and openssl versions
+######################################################################
+
+if [ -z "${OPENSSL}" ]
+then
+    OPENSSL="$(findtls13openssl)"
+    if [ -z "${OPENSSL}" ]
+    then
+        echo "This script requires a version of OpenSSL that supports TLS 1.3, which wasn't found.  Exiting."
+        exit 1
+    else
+        echo "Using OpenSSL:  ${OPENSSL}"
+    fi
+fi
+
+if [ -z "${CURL}" ]
+then
+    CURL="$(findtls13curl)"
+    if [ -z "${CURL}" ]
+    then
+        echo "This script requires a version of 'curl' that supports TLS 1.3, which wasn't found.  Exiting."
+        exit 1
+    else
+        echo "Using curl:  ${CURL}"
+    fi
+fi
+
+
+######################################################################
+#                    Run the main function
+######################################################################
+
+search
+

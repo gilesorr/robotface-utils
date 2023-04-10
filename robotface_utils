@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+# <|°_°|>
+#
+# This is a library of functions used by other <|°_°|> Bash scripts.
+#
+# findtls13curl() - returns path to curl with TLS 1.3 or empty
+# findtls13openssl() - returns path to OpenSSL with TLS 1.3 or empty
+# ishostnamevalid() - check if the hostname is in the DNS
+
+
+######################################################################
+#                    findtls13curl
+######################################################################
+# Finds 'curl' that supports TLS 1.3 or returns an empty string
+# Thanks: https://unix.stackexchange.com/questions/672792/determine-tls-versions-supported-by-curl
+
+findtls13curl () {
+    # In 2021 Apple's 'curl' didn't support TLS 1.3.  By macOS Monterey this
+    # was fixed, but it's still worth checking for.  Look for
+    # brew-installed versions too:
+    CURL=""
+    for curlbinary in /opt/homebrew/opt/curl/bin/curl /usr/local/opt/curl/bin/curl /usr/bin/curl curl
+    do
+        if [ -x "${curlbinary}" ]
+        then
+            # This usually throws an error because localhost:1 can't be connected
+            # to, but we don't care unless we get error 2 which indicates that we
+            # have a bad option in play.
+            ${curlbinary} --tlsv1.3 --silent --connect-timeout 1 --url 'http://localhost:1' 2>/dev/null
+            if [[ $? -ne 2 ]]
+            then
+                CURL="${curlbinary}"
+                break
+            fi
+        fi
+    done
+    echo "${CURL}"
+}
+
+######################################################################
+#                    findtls13openssl
+######################################################################
+# Finds an OpenSSL that supports TLS 1.3 or returns an empty string
+
+findtls13openssl () {
+    # Apple's own 'openssl' was incredibly old (0.9.8) until ~2019-06 when they
+    # changed to LibreSSL which is better, but also didn't initially
+    # support TLS 1.3.  Brew respects Apple's version, so we have to go on
+    # a version hunt.
+    #
+    # For Linux, the second-last entry will usually work.
+
+    OPENSSL=""
+
+    # Put Mac-preferred OpenSSL variants (Intel and M1 silicon paths) first
+    # so they're found before LibreSSL:
+    for opensslbinary in /usr/local/opt/openssl@1.1/bin/openssl /opt/homebrew/opt/openssl@1.1/bin/openssl /usr/local/opt/openssl/bin/openssl /usr/bin/openssl openssl
+    do
+        if [ -x "${opensslbinary}" ]
+        then
+            if ( ${opensslbinary} s_client -help 2>&1 >/dev/null | grep -q -- "-tls1_3" )
+            then
+                OPENSSL="${opensslbinary}"
+                break
+            fi
+        fi
+    done
+    echo "${OPENSSL}"
+}
+
+######################################################################
+#                    is hostname valid
+######################################################################
+
+ishostnamevalid () {
+    # given a hostname, try to find the IP and use that to determine if the
+    # hostname is actually valid.  Return 0 for a valid hostname, 1 for an
+    # invalid hostname.
+
+    IP="$( dig +short "${1}")"
+    if [ -z "${IP}" ]
+    then
+        # hostname isn't valid - no IP returned
+        echo 1
+    else
+        # IP returned, valid hostname
+        echo 0
+    fi
+}
+
