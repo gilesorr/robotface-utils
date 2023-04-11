@@ -3,6 +3,10 @@
 # Created:  2018-06-07
 # Purpose:
 #     Check TLS certificate details.
+#
+# TODO:
+# - check that the FQDN matches the address contained in the cert, if
+#   not "Warning: your URL '...' doesn't match the cert URL '...'"
 
 ######################################################################
 #                            Help
