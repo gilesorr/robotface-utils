@@ -6,6 +6,17 @@
 #
 # Purpose:
 #     Check TLS certificates for a list of FQDNS.
+#
+# TODO:
+# - when running EXTERNALs, sort and dedupe the list of hosts
+# - add CL switch to change EXPIRY_ALARM_DAYS
+# - allow comments in lists of hosts:
+#       grep -ve '^ *#' urls.txt | grep -ve '^ *$'
+#   that will also remove empty lines
+# - check that returned cert FQDN matches given hostname (curl error 60
+#   occurs on both certs issued by an unknown authority _and_ when the
+#   returned cert doesn't match the original FQDN and we need to
+#   distinguish)
 
 ######################################################################
 #           User settings
@@ -74,14 +85,19 @@ usage () {
     # the help or keep this "usage" output up-to-date: you have to do that.
     cat << EOF
 Usage:
-    $(basename "${0}") [-h] [-c] [-s]
+    $(basename "${0}") [-h] [-s] [-i] [-t <filename>]
 
-Check TLS certificate expiry dates across hosts.  Edit the script to change
-the list of hosts ("${0}").
+Check TLS certificate expiry dates and issuers across hosts.
 
 -h            show this help and exit
--c            show certificate issuer and expiry date for each host
+-i            check internal list of FQDNs (list is embedded in the script)
 -s            use System versions of 'curl' and 'openssl' (don't search)
+-t <file>     check all FQDNs in the file (can be used more than once)
+
+    Example:
+        $(basename "${0}") -s -t <(list-ansible-hosts) -t fqdns.txt
+    where 'list-ansible-hosts' is a command that does what the name implies
+    (this uses a Bash trick to turn command output into a HERE document).
 EOF
 }
 
@@ -144,54 +160,53 @@ dateandissuer () {
 #                    search certificates
 ######################################################################
 
-search() {
-    for host in $( list-fqdns )
-    do
-        # for each host, print the name colourized and then print the
-        # certificate date.  Date will be coloured EXPIRY_COLOUR if the
-        # expiry date is closer than EXPIRY_ALARM_DAYS away.
-        echo -en "Host ${HOST_COLOUR}${host}${NO_COLOUR}: "
-        # we only want curl's return value, send the rest to the trash
-        "${CURL}" -m $CURL_TIMEOUT "https://${host}" > /dev/null 2>&1
-        curlretval=$?
-        # 'man curl' is your friend for return values - at the end of the
-        # document.
-        case ${curlretval} in
-            0|60)
-                # 60: Peer certificate cannot be authenticated with known
-                #     CA certificates (we sometimes get this for sites with
-                #     our certs)
-                # 0: all good
-                dateandissuer "${host}"
-                ;;
-            6) # couldn't resolve host
-                echo -e "${WARNING_COLOUR}Host couldn't be resolved.${NO_COLOUR}"
-                ;;
-            7) # man curl: "Failed to connect to host."
-                echo -e "${WARNING_COLOUR}Unable to connect to host or host doesn't have certificate.${NO_COLOUR}"
-                ;;
-            28) # Operation time-out
-                echo -e "${WARNING_COLOUR}Not a valid SSL/TLS host (time-out)?${NO_COLOUR}"
-                ;;
-            35) # SSL connect error. The SSL handshaking failed.
-                echo -e "${WARNING_COLOUR}SSL handshake failure.${NO_COLOUR}"
-                ;;
-            51) # man curl: "The peer's SSL certificate or SSH MD5
-                # fingerprint was not OK." this seems to occur for a
-                # machine that has a public-facing name that's different
-                # than the one we're trying to call.
-                echo -e "${WARNING_COLOUR}curl dislikes certificate: this name doesn't match public name?${NO_COLOUR}"
-                ;;
-            127) # 'man curl' doesn't list this, but by all appearances ...
-                 # (may happen under other circumstances too):
-                echo -e "${WARNING_COLOUR}malformed 'curl' command ... probably a script problem?${NO_COLOUR}"
-                ;;
-            *)
-                echo -e "${WARNING_COLOUR}don't recognize the curl return value, update the script for '${curlretval}'${NO_COLOUR}"
-                ;;
-        esac
-    done
-    echo -e "Expiries less than ${EXPIRY_ALARM_DAYS} days away have been ${EXPIRY_COLOUR}highlighted${NO_COLOUR} "
+checkcert() {
+    host="${1}"
+    # for each host, print the name colourized and then print the
+    # certificate date.  Date will be coloured EXPIRY_COLOUR if the
+    # expiry date is closer than EXPIRY_ALARM_DAYS away.
+    echo -en "Host ${HOST_COLOUR}${host}${NO_COLOUR}: "
+    # we only want curl's return value, send the rest to the trash
+    "${CURL}" -m $CURL_TIMEOUT "https://${host}" > /dev/null 2>&1
+    curlretval=$?
+    # 'man curl' is your friend for return values - at the end of the
+    # document.
+    case ${curlretval} in
+        0)  # the value you're always hoping for ...
+            dateandissuer "${host}"
+            ;;
+        6) # couldn't resolve host
+            echo -e "${WARNING_COLOUR}Host couldn't be resolved.${NO_COLOUR}"
+            ;;
+        7) # man curl: "Failed to connect to host."
+            echo -e "${WARNING_COLOUR}Unable to connect to host or host doesn't have certificate.${NO_COLOUR}"
+            ;;
+        28) # Operation time-out
+            echo -e "${WARNING_COLOUR}Not a valid SSL/TLS host (time-out)?${NO_COLOUR}"
+            ;;
+        35) # SSL connect error. The SSL handshaking failed.
+            echo -e "${WARNING_COLOUR}SSL handshake failure.${NO_COLOUR}"
+            ;;
+        51) # man curl: "The peer's SSL certificate or SSH MD5
+            # fingerprint was not OK." this seems to occur for a
+            # machine that has a public-facing name that's different
+            # than the one we're trying to call.
+            echo -e "${WARNING_COLOUR}curl dislikes certificate: this name doesn't match public name?${NO_COLOUR}"
+            ;;
+        60) #
+            # 60: Peer certificate cannot be authenticated with known
+            #     CA certificates (we sometimes get this for sites with
+            #     our certs)
+            echo -e "$(dateandissuer "${host}") ${WARNING_COLOUR}dubious CA (curl error 60)${NO_COLOUR}"
+            ;;
+        127) # 'man curl' doesn't list this, but by all appearances ...
+             # (may happen under other circumstances too):
+            echo -e "${WARNING_COLOUR}malformed 'curl' command ... probably a script problem?${NO_COLOUR}"
+            ;;
+        *)
+            echo -e "${WARNING_COLOUR}don't recognize the curl return value, update the script for '${curlretval}'${NO_COLOUR}"
+            ;;
+    esac
 }
 
 
@@ -205,20 +220,29 @@ then
     exit 1
 fi
 
+URLFILES=()
+INTERNAL="false"
+EXTERNAL="false"
+
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":hcs" opt
+while getopts ":hist:" opt
 do
     case ${opt} in
         h)
             usage
             exit 0
             ;;
-        c)
+        i)
+            INTERNAL="true"
             ;;
         s)  # use System utilities
             CURL="/usr/bin/curl"
             OPENSSL="/usr/bin/openssl"
             #SYSTEMUTILS="true"
+            ;;
+        t)
+            EXTERNAL="true"
+            URLFILES+=("${OPTARG}")
             ;;
 
         \?)
@@ -227,14 +251,15 @@ do
             exit 1
             ;;
         :)
-            # no option currently requires an argument, but this is how to
-            # handle it if that changes.
+            # when an option requires an argument and none is given,
+            # it lands here:
             echo "option -${OPTARG} requires an argument." >&2
             usage
             exit 1
             ;;
     esac
 done
+shift $(( OPTIND - 1 ))
 
 
 ######################################################################
@@ -270,5 +295,40 @@ fi
 #                    Run the main function
 ######################################################################
 
-search
+if ${INTERNAL}
+then
+    for host in $( list-fqdns )
+    do
+        checkcert "${host}"
+    done
+fi
+
+# Print a visible divider between internal and external lists if both are
+# executed.
+if ${INTERNAL} && ${EXTERNAL}
+then
+    echo "     -----"
+fi
+
+if ${EXTERNAL}
+then
+    for urlfile in "${URLFILES[@]}"
+    do
+        while read -r url
+        do
+            # Tried to filter out comment lines here, no joy
+            # as is, it filters out empty lines ...
+            # || ! [[ "${url}" =~ '#' ]]
+            if [ -n "${url}" ]
+            then
+                checkcert "${url}"
+            fi
+        done < "${urlfile}"
+    done
+fi
+
+if ${INTERNAL} || ${EXTERNAL}
+then
+    echo -e "Expiries less than ${EXPIRY_ALARM_DAYS} days away have been ${EXPIRY_COLOUR}highlighted${NO_COLOUR} "
+fi
 

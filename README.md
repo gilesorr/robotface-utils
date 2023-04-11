@@ -3,17 +3,15 @@
 Website-related utility scripts.
 
 This set of utility scripts (initially two, and a library they both use)
-were born out of my work at Toronto Public Library.  When I told some geek
+were born out of my work at Toronto Public Library.  When I told some
 friends about the `chkcertexpiry` script, they thought it was worth
-releasing to the public.  My boss has graciously agreed to me publicly
-releasing these scripts, which were written and are maintained as part of
-my work at TPL.  I hope they're useful.
+sharing.  My bosses graciously agreed to me publicly releasing these
+scripts, which were written and are maintained as part of my work at TPL.
+I hope they're useful.
 
 ## chkcertexpiry
 
-Live-checks the expiry date of TLS certificates for a set of websites.  The
-website list is directly embedded in the script.  This will probably change
-soon - I found it convenient ... right up until this became a git repo.
+Live-checks the expiry date of TLS certificates for a set of websites.
 Run the script to see a help message.
 
 ## tlsdetails
@@ -27,11 +25,11 @@ In 2021 - after TLS came into wide use - macOS's versions of `curl` and
 `openssl` still didn't support TLS v1.3.  As an attempt to support people
 on older Macs, the `robotface_utils` library used by both scripts attempts
 to detect other versions of those two programs - notably the Homebrew
-versions which are better and more up-to-date.  If the detection seems to
-be causing problems or you're sure you have a modern version of the OS (I
-know everything's fine with both Monterey and Ventura on Intel or Mac
-silicon), use `-s` to use the system versions of `curl` and `openssl`
-without bothering to search for other versions.
+versions which are (possibly) better and (have been) more up-to-date.  If
+the detection seems to be causing problems or you're sure you have a modern
+version of the OS (I know everything's fine with both Monterey and Ventura
+on Intel or Mac silicon), use `-s` to use the system versions of `curl` and
+`openssl` without bothering to search for other versions.
 
 ## Naming
 
@@ -51,6 +49,6 @@ of cards and rename it.
 
 ## TODO
 
-- add a command line option to `chkcertexpiry` to read a file containing a
-  text list of domain names
+The TODO list will probably be maintained in lead-in comments in each
+script.
 
