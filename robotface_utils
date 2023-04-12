@@ -6,6 +6,9 @@
 # findtls13curl() - returns path to curl with TLS 1.3 or empty
 # findtls13openssl() - returns path to OpenSSL with TLS 1.3 or empty
 # ishostnamevalid() - check if the hostname is in the DNS
+# rfversion() - returns repo info, tag or short hash, checkout date
+#
+# TODO:
 
 
 ######################################################################
@@ -86,5 +89,41 @@ ishostnamevalid () {
         # IP returned, valid hostname
         echo 0
     fi
+}
+
+######################################################################
+#                    robotface version
+######################################################################
+# Not well researched or well written, but does work for a basic checkout.
+# Returns:
+#     - branch/tag/date if there's a tag
+#     - branch/hash/date if no tag
+#
+# - uses 'realpath' to find the code
+# - 'git rev-parse --short HEAD' to get the short hash (what if
+#   you're not at HEAD?)
+# - 'git tag --contains <hash> | cat' to check if current hash is tagged
+# - 'git rev-parse --abbrev-ref HEAD' to get just the branch
+# - 'git log -1 --format=%cd' to show the last commit datestamp
+
+rfversion () {
+    # shellcheck disable=SC2164  # Use "'cd ... || exit' or 'cd ... || return' in case cd fails."
+    cd "$(dirname "$(realpath "$(which "${0}")")")"
+    remote="$(git remote -v | grep origin | grep fetch | awk '{ print $2 }')"
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    shorthash="$(git rev-parse --short HEAD)"
+    tag="$(git tag --contains "${shorthash}")"
+    revdate="$(git log -1 --format=%cd)"
+
+    # Output:
+    echo "$(basename "${0}") version:"
+    echo "${remote} branch: ${branch}"
+    if [ -n "${tag}" ]
+    then
+        echo -n "${tag} / "
+    else
+        echo -n "${shorthash} / "
+    fi
+    echo "${revdate}"
 }
 

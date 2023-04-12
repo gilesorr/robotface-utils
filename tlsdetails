@@ -17,13 +17,14 @@ usage() {
     # the help or keep this "help" output up-to-date: you have to do that.
     cat << EOF
 Usage:
-    $(basename "${0}") [-h] [-s] <domain-name>
+    $(basename "${0}") [-h] [-s] [-v] <domain-name>
 
 Show HTTP(s) and TLS certificate details.
 Do not include the 'http(s)://' leader on the domain name.
 
 -h            show this help and exit
 -s            use System versions of 'curl' and 'openssl' (don't search)
+-v            version
 EOF
 }
 
@@ -114,7 +115,7 @@ source "$(dirname "${0}")/robotface_utils"
 ######################################################################
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":hs" opt
+while getopts ":hsv" opt
 do
     case ${opt} in
         h)
@@ -123,6 +124,10 @@ do
             ;;
         s)  # use System utilities
             OPENSSL="/usr/bin/openssl"
+            ;;
+        v)
+            rfversion
+            exit 0
             ;;
 
         \?)
