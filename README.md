@@ -31,6 +31,13 @@ version of the OS (I know everything's fine with both Monterey and Ventura
 on Intel or Mac silicon), use `-s` to use the system versions of `curl` and
 `openssl` without bothering to search for other versions.
 
+## Explanations
+
+Some notes on how this is done (incomplete at this point):
+
+- [Date Math](DateMath.md)
+- [Connection and Certificate Details](DissectingTheConnection.md)
+
 ## Naming
 
 My initial thought was to name this repository GO-utils, but for most
