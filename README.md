@@ -21,15 +21,16 @@ passed on the command line.  Again: run the script to see a help message.
 
 ## If You're Using a Mac ...
 
-In 2021 - after TLS came into wide use - macOS's versions of `curl` and
-`openssl` still didn't support TLS v1.3.  As an attempt to support people
-on older Macs, the `robotface_utils` library used by both scripts attempts
-to detect other versions of those two programs - notably the Homebrew
-versions which are (possibly) better and (have been) more up-to-date.  If
-the detection seems to be causing problems or you're sure you have a modern
-version of the OS (I know everything's fine with both Monterey and Ventura
-on Intel or Mac silicon), use `-s` to use the system versions of `curl` and
-`openssl` without bothering to search for other versions.
+In 2021 - after TLS v1.3 came into wide use - macOS's versions of `curl`
+and `openssl` still didn't support TLS v1.3.  As an attempt to support
+people on older Macs, the `robotface_utils` library used by both scripts
+attempts to detect other versions of those two programs - notably the
+Homebrew versions which are (possibly) better and (have been) more
+up-to-date.  If the detection seems to be causing problems or you're sure
+you have a modern version of the OS (I know everything's fine with both
+Monterey and Ventura on Intel or Mac silicon), use `-s` to use the system
+versions of `curl` and `openssl` without bothering to search for other
+versions.
 
 ## Explanations
 
