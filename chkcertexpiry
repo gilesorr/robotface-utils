@@ -8,21 +8,26 @@
 #     Check TLS certificates for a list of FQDNS.
 #
 # TODO:
-# - when running EXTERNALs, sort and dedupe the list of hosts
 # - add CL switch to change EXPIRY_ALARM_DAYS
-# - allow comments in lists of hosts:
-#       grep -ve '^ *#' urls.txt | grep -ve '^ *$'
-#   that will also remove empty lines
 # - check that returned cert FQDN matches given hostname (curl error 60
 #   occurs on both certs issued by an unknown authority _and_ when the
 #   returned cert doesn't match the original FQDN and we need to
 #   distinguish)
+#
+# RECENTLY ADDDED:
+# - 2023-04-12: comments and empty lines filtered out of URL files
+# - 2023-04-12: -n <count> to change cert warning days
+#
+# CAVEATS:
+# - I was thinking of sorting and de-duping the URL lists, but some people
+#   may not want that done.  Since the certs are tested in sequence from user
+#   input, de-duping and sorting is up to the user.
 
 ######################################################################
 #           User settings
 ######################################################################
 # If certs expire in less than EXPIRY_ALARM_DAYS, highlight the cert date
-# in the output:
+# in the output (this can also be changed at the command line):
 EXPIRY_ALARM_DAYS=45
 # How long 'curl' waits before giving up on a non-responsive host:
 CURL_TIMEOUT=4
@@ -83,6 +88,8 @@ fi
 usage () {
     # Unlike Python's "argparse," Bash's "getopts" doesn't auto-generate
     # the help or keep this "usage" output up-to-date: you have to do that.
+    exp="$(echo -e "${EXPIRY_COLOUR}")"
+    no="$(echo -e "${NO_COLOUR}")"
     cat << EOF
 Usage:
     $(basename "${0}") [-h] [-v] [-s] [-i] [-t <filename>]
@@ -91,6 +98,8 @@ Check TLS certificate expiry dates and issuers across hosts.
 
 -h            show this help and exit
 -i            check internal list of FQDNs (list is embedded in the script)
+-n <count>    if cert expires in less than <count> days, ${exp}text is colourized${no}
+              (default ${EXPIRY_ALARM_DAYS} days)
 -s            use System versions of 'curl' and 'openssl' (don't search)
 -t <file>     check all FQDNs in the file (can be used more than once)
 -v            version
@@ -226,15 +235,26 @@ INTERNAL="false"
 EXTERNAL="false"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":hvist:" opt
+while getopts ":hvist:n:" opt
 do
     case ${opt} in
         h)
             usage
             exit 0
             ;;
-        i)
+        i)  # go through the internal list of certificates
             INTERNAL="true"
+            ;;
+        n)
+            incomingcount="${OPTARG}"
+            if [[ $incomingcount =~ ^[0-9]+$ ]]
+            then
+                EXPIRY_ALARM_DAYS="${incomingcount}"
+            else
+                echo "'-n' requires a positive integer."
+                usage
+                exit 2
+            fi
             ;;
         s)  # use System utilities
             CURL="/usr/bin/curl"
@@ -328,7 +348,8 @@ then
             then
                 checkcert "${url}"
             fi
-        done < "${urlfile}"
+        # feed in the URL file(s), filtering out empty lines and comments:
+        done < <(grep -ve '^ *#' "${urlfile}" | grep -ve '^ *$')
     done
 fi
 
