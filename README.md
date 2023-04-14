@@ -57,6 +57,9 @@ of cards and rename it.
 
 ## TODO
 
-The TODO list will probably be maintained in lead-in comments in each
-script.
+There are TODO lists in the lead-in comments in each of the scripts,
+specific to them.  This list is more general.
+
+- load `robotface_utils` first, move colours into library, then have
+  user setting of colours after that
 

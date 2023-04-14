@@ -8,11 +8,12 @@
 #     Check TLS certificates for a list of FQDNS.
 #
 # TODO:
-# - add CL switch to change EXPIRY_ALARM_DAYS
 # - check that returned cert FQDN matches given hostname (curl error 60
 #   occurs on both certs issued by an unknown authority _and_ when the
 #   returned cert doesn't match the original FQDN and we need to
-#   distinguish)
+#   distinguish) (done in 'tlsdetails')
+# - add a command line switch to not display "good" (not expiring soon, no
+#   errors) certificates
 #
 # RECENTLY ADDDED:
 # - 2023-04-12: comments and empty lines filtered out of URL files
@@ -175,7 +176,7 @@ checkcert() {
     # for each host, print the name colourized and then print the
     # certificate date.  Date will be coloured EXPIRY_COLOUR if the
     # expiry date is closer than EXPIRY_ALARM_DAYS away.
-    echo -en "Host ${HOST_COLOUR}${host}${NO_COLOUR}: "
+    echo -en "${HOST_COLOUR}${host}${NO_COLOUR}: "
     # we only want curl's return value, send the rest to the trash
     "${CURL}" -m $CURL_TIMEOUT "https://${host}" > /dev/null 2>&1
     curlretval=$?
