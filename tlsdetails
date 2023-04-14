@@ -8,6 +8,18 @@
 # - check that the FQDN matches the address contained in the cert, if
 #   not "Warning: your URL '...' doesn't match the cert URL '...'"
 
+# Set some colours for text output:
+B_RED="\033[1;31m"
+B_GREEN="\033[1;32m"
+B_YELLOW="\033[1;33m"
+NO_COLOUR="\033[0;0m"
+
+# If you find the script too colourful, tweak it more to your liking:
+EXPIRY_COLOUR="${B_YELLOW}"
+HOST_COLOUR="${B_GREEN}"
+WARNING_COLOUR="${B_RED}"
+
+
 ######################################################################
 #                            Help
 ######################################################################
@@ -54,7 +66,7 @@ days_to_expiry() {
 }
 
 issuer() {
-    echo "${1}" | ${OPENSSL} x509 -noout -issuer | awk -F "=" '{ print $4 }' | sed -e 's@/.*@@'
+    echo "${1}" | ${OPENSSL} x509 -noout -issuer | awk -F "=" '{ print $4 }' | sed -e 's@/.*@@' | sed -e 's/^ *//'
 }
 
 tlsversions() {
@@ -76,8 +88,8 @@ httpversion() {
     # This 'curl' command returns nothing but a number: '1.1' for most
     # connections, but '2' for HTTP2 sites - and '0' for https:// requests
     # on an unencrypted site.
-    unEncNum=$(curl -sI "${1}"         -o/dev/null -w '%{http_version}')
-    EncNum=$(curl -sI   "https://${1}" -o/dev/null -w '%{http_version}')
+    unEncNum=$(curl -sI         "${1}" -o/dev/null -w '%{http_version}')
+    EncNum=$(curl   -sI "https://${1}" -o/dev/null -w '%{http_version}')
     # since possible return values of EncNum include '1.1', which isn't a
     # valid number in Bash, this is a string comparison:
     if [ "${EncNum}" -eq "0" ]
@@ -86,6 +98,12 @@ httpversion() {
     else
         echo "${EncNum}"
     fi
+}
+
+dns() {
+    # Given the output of s_client, find the DNS names the certificate is
+    # valid for:
+    echo "${1}" | openssl x509 -noout -text | grep "DNS:" | sed -e 's/ *DNS:/ /g' | sed -e 's/ //'
 }
 
 
@@ -195,6 +213,17 @@ then
     then
         echo "No certificate returned."
     else
+        echo "Requested:      ${domain_name}"
+
+        echo -n "For:            "
+        dnsentries="$(dns "${sclient_out}")"
+        if [[ ${dnsentries} =~ ${domain_name} ]]
+        then
+            echo -e "${dnsentries}"
+        else
+            echo -e "${WARNING_COLOUR}${dnsentries} (no match)${NO_COLOUR}"
+        fi
+
         echo "Expiry Date:    $(expiry_date "${sclient_out}") ($(days_to_expiry "${sclient_out}") days)"
         echo "Issuer:         $(issuer "${sclient_out}")"
         echo "TLS Versions:   $(tlsversions "${domain_name}")"
