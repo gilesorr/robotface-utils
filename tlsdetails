@@ -194,8 +194,10 @@ fi
 #                    Check and process our domain name
 ######################################################################
 
-if [ "$(ishostnamevalid "${domain_name}")" -eq "0" ]
+if ! [ "$(ishostnamevalid "${domain_name}")" -eq "0" ]
 then
+    echo "'${1}' appears to be an invalid domain."
+else
     # it's extremely difficult to capture stderr and stdout into two
     # separate variables at once, so use a tmpfile:
     tmpfile="$(/usr/bin/mktemp "/tmp/$(basename "${0}").XXXXXXXX")"
@@ -229,7 +231,5 @@ then
         echo "TLS Versions:   $(tlsversions "${domain_name}")"
         echo "HTTP Version:   $(httpversion "${domain_name}")"
     fi
-else
-    echo "'${1}' appears to be an invalid domain."
 fi
 
