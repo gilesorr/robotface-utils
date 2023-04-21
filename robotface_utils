@@ -3,6 +3,8 @@
 #
 # This is a library of functions used by other <|°_°|> Bash scripts.
 #
+# dnsmatch() - given an FQDN and the list of DNS names from a certificate,
+#   see if there's a match.  Returns 0/1
 # findtls13curl() - returns path to curl with TLS 1.3 or empty
 # findtls13openssl() - returns path to OpenSSL with TLS 1.3 or empty
 # ishostnamevalid() - check if the hostname is in the DNS
@@ -30,16 +32,18 @@ dnsmatch () {
         # Better look for a wildcard ...
         if [[ ${dnsEntries} =~ \* ]]
         then
-            # we have a wildcard ... assuming only one!
-            cleanedWild="$(echo "${dnsEntries}" | sed -e 's/, /\n/' | grep '\*' | sed -e 's/\*\.//')"
-            if [[ ${FQDN} =~ ${cleanedWild} ]]
-            then
-                # wildcard match:
-                return 0
-            else
-                # not a wildcard match:
-                return 1
-            fi
+            # we have a wildcard, go through them:
+            # Process: split the list on ', ' between names, then match
+            # only the items with * in them (wildcards), then remove the
+            # leading '*.' and finally try to match.
+            for dom in $(echo "${dnsEntries}" | sed -e 's/, /\n/g' | grep '\*' | sed -e 's/\*\.//')
+            do
+                if [[ ${FQDN} =~ ${dom} ]]
+                then
+                    # wildcard match:
+                    return 0
+                fi
+            done
         fi
         # not a wildcard and not a match:
         return 1
@@ -113,10 +117,10 @@ ishostnamevalid () {
     if [ -z "${IP}" ]
     then
         # hostname isn't valid - no IP returned
-        echo 1
+        return 1
     else
         # IP returned, valid hostname
-        echo 0
+        return 0
     fi
 }
 
