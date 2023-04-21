@@ -219,7 +219,7 @@ else
 
         echo -n "For:            "
         dnsentries="$(dns "${sclient_out}")"
-        if [[ ${dnsentries} =~ ${domain_name} ]]
+        if dnsmatch "${domain_name}" "${dnsentries}"
         then
             echo -e "${dnsentries}"
         else

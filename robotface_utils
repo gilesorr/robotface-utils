@@ -17,6 +17,35 @@
 # Finds 'curl' that supports TLS 1.3 or returns an empty string
 # Thanks: https://unix.stackexchange.com/questions/672792/determine-tls-versions-supported-by-curl
 
+dnsmatch () {
+    # Given an FQDN and the dnsEntries from a certificate, see if the
+    # certificate is for the FQDN.
+    FQDN="${1}"
+    dnsEntries="${2}"
+    if [[ ${dnsEntries} =~ ${FQDN} ]]
+    then
+        # FQDN is in the list of entries (and not a wildcard):
+        return 0
+    else
+        # Better look for a wildcard ...
+        if [[ ${dnsEntries} =~ \* ]]
+        then
+            # we have a wildcard ... assuming only one!
+            cleanedWild="$(echo "${dnsEntries}" | sed -e 's/, /\n/' | grep '\*' | sed -e 's/\*\.//')"
+            if [[ ${FQDN} =~ ${cleanedWild} ]]
+            then
+                # wildcard match:
+                return 0
+            else
+                # not a wildcard match:
+                return 1
+            fi
+        fi
+        # not a wildcard and not a match:
+        return 1
+    fi
+}
+
 findtls13curl () {
     # In 2021 Apple's 'curl' didn't support TLS 1.3.  By macOS Monterey this
     # was fixed, but it's still worth checking for.  Look for
