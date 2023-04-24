@@ -1,0 +1,64 @@
+CONNECTED(00000005)
+---
+Certificate chain
+ 0 s:CN = howtouselinux.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFPjCCBCagAwIBAgISA6s703gWuyt1T1aOdRHnfdcPMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMzA0MTQxMjIzMjBaFw0yMzA3MTMxMjIzMTlaMBwxGjAYBgNVBAMT
+EWhvd3RvdXNlbGludXguY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEApaZY2xDiUNIPjjZkvMkuweM8pFfvb2L4wKb5LHyxi8BM5im+7bxWm2FRPzAX
+tKUHDiivP2kjEWx2DUixKMDBf+zde7Chv5CGAdwfQsqVJt2kri9XhJ5jRmDieV/I
+/yevXHazpVlhtc47dllKp4KnZXACp/2iciAmfS63QprL/mJvtbli6uObIkGnriHr
+o8bTqKzTOh3mDL2UuNd8CLMof34FCYOyEqc8/t1m32rkHlNnpUnmSRa9279SEct3
+X+TdzBmwKxBI6bfe7n4NQm5mREfyGbaeBl6Ll/spBRYzuM/suh+RACC8OWaCn6FM
+36beWH/MEaqoT0SmZnhyMcYnowIDAQABo4ICYjCCAl4wDgYDVR0PAQH/BAQDAgWg
+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0G
+A1UdDgQWBBSv6/zEyj14FS6xKAe16vmFewXp9jAfBgNVHSMEGDAWgBQULrMXt1hW
+y65QCUDmH6+dixTCxjBVBggrBgEFBQcBAQRJMEcwIQYIKwYBBQUHMAGGFWh0dHA6
+Ly9yMy5vLmxlbmNyLm9yZzAiBggrBgEFBQcwAoYWaHR0cDovL3IzLmkubGVuY3Iu
+b3JnLzAzBgNVHREELDAqghFob3d0b3VzZWxpbnV4LmNvbYIVd3d3Lmhvd3RvdXNl
+bGludXguY29tMEwGA1UdIARFMEMwCAYGZ4EMAQIBMDcGCysGAQQBgt8TAQEBMCgw
+JgYIKwYBBQUHAgEWGmh0dHA6Ly9jcHMubGV0c2VuY3J5cHQub3JnMIIBAwYKKwYB
+BAHWeQIEAgSB9ASB8QDvAHUAtz77JN+cTbp18jnFulj0bF38Qs96nzXEnh0JgSXt
+tJkAAAGHf+9FuwAABAMARjBEAiALkFdH00Y1rUs72/MqsZ/iaLmVuwllAJ2q5F2x
+0DkCsgIgUtEg+krmADWiiROLCN7BnFMUxywuR2GgWLB9YpU/38kAdgB6MoxU2Lct
+tiDqOOBSHumEFnAyE4VNO9IrwTpXo1LrUgAAAYd/70XEAAAEAwBHMEUCIAL47Yvt
+Gwve/IW1Z6lrr/FexweIePmnroygxbRW9x5kAiEApAQ+rTL3pPKFzKq/lLs9Sjak
+QTB0Arg2HN03tpzYEQkwDQYJKoZIhvcNAQELBQADggEBAGBGpi477vp/6TDJa8eq
+5truKzgkPA9sG0cEvs+0ZeSw9rmKqwj1cFM5JksSLlV6fGdESaJUxJdSC8C+zmvv
+Eibb4dqxOv9CGxMyxatncKFDYe31fXMmTXCDIVEIDPhYNcCfi6M8BzSjlaQKNiOR
+ZzHd1rjSTSFfcb9FUA2W8dcIGIYQsE2LDiVaK29eXq19MfbzoeOxP8i5fXiwdo10
+zSzXLrXFCyyauZB6cLPb0aClhapmCZ+3ZRmUAccemqeqRV5KvOXmhD6w/1WwpM3y
+JnMOePDH5+7nTU67f4UapBr+UXKg2/KFBVkTnKOS+n68fjHgM46dUJGhh6tE462o
++SU=
+-----END CERTIFICATE-----
+subject=CN = howtouselinux.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4602 bytes and written 399 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

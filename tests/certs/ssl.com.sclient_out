@@ -1,0 +1,89 @@
+CONNECTED(00000006)
+---
+Certificate chain
+ 0 s:C = US, ST = Texas, L = Houston, O = SSL.com (SSL Corp), serialNumber = NV20081614243, CN = www.ssl.com, businessCategory = Private Organization, jurisdictionST = Nevada, jurisdictionC = US
+   i:C = US, ST = Texas, L = Houston, O = SSL Corp, CN = SSL.com EV SSL Intermediate CA ECC R2
+ 1 s:C = US, ST = Texas, L = Houston, O = SSL Corp, CN = SSL.com EV SSL Intermediate CA ECC R2
+   i:C = US, ST = Texas, L = Houston, O = SSL Corporation, CN = SSL.com EV Root Certification Authority ECC
+ 2 s:C = US, ST = Texas, L = Houston, O = SSL Corporation, CN = SSL.com EV Root Certification Authority ECC
+   i:C = US, ST = Texas, L = Houston, O = SSL Corporation, CN = SSL.com EV Root Certification Authority RSA R2
+ 3 s:C = US, ST = Texas, L = Houston, O = SSL Corporation, CN = SSL.com EV Root Certification Authority RSA R2
+   i:C = PL, O = Unizeto Technologies S.A., OU = Certum Certification Authority, CN = Certum Trusted Network CA
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFyzCCBVKgAwIBAgIQUNyoqz08lKNeVFeuijWJYzAKBggqhkjOPQQDAzByMQsw
+CQYDVQQGEwJVUzEOMAwGA1UECAwFVGV4YXMxEDAOBgNVBAcMB0hvdXN0b24xETAP
+BgNVBAoMCFNTTCBDb3JwMS4wLAYDVQQDDCVTU0wuY29tIEVWIFNTTCBJbnRlcm1l
+ZGlhdGUgQ0EgRUNDIFIyMB4XDTIyMDcyMjA0NTQxMloXDTIzMDgyMjA0NTQxMlow
+gccxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVUZXhhczEQMA4GA1UEBwwHSG91c3Rv
+bjEbMBkGA1UECgwSU1NMLmNvbSAoU1NMIENvcnApMRYwFAYDVQQFEw1OVjIwMDgx
+NjE0MjQzMRQwEgYDVQQDDAt3d3cuc3NsLmNvbTEdMBsGA1UEDwwUUHJpdmF0ZSBP
+cmdhbml6YXRpb24xFzAVBgsrBgEEAYI3PAIBAgwGTmV2YWRhMRMwEQYLKwYBBAGC
+NzwCAQMTAlVTMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEM3vxqDl+ZWOY+pors09B
+ikCh8niHFTpbhX5hlQfMkEaVXgT/w7qn26UktDoGDKaTP0jp5dhvFC91B/IPdcba
+1qgv+PKMOZlcM07EihkIDzvXFXA30OsUyDF22EKwWWfho4IDVTCCA1EwDAYDVR0T
+AQH/BAIwADAfBgNVHSMEGDAWgBSE7vh5PghkdkhkOfWxv4sCXgu8JzB0BggrBgEF
+BQcBAQRoMGYwQgYIKwYBBQUHMAKGNmh0dHA6Ly9jZXJ0LnNzbC5jb20vU1NMY29t
+LVN1YkNBLUVWLVNTTC1FQ0MtMzg0LVIyLmNlcjAgBggrBgEFBQcwAYYUaHR0cDov
+L29jc3BzLnNzbC5jb20wHwYDVR0RBBgwFoILd3d3LnNzbC5jb22CB3NzbC5jb20w
+XwYDVR0gBFgwVjAHBgVngQwBATANBgsqhGgBhvZ3AgUBATA8BgwrBgEEAYKpMAED
+AQQwLDAqBggrBgEFBQcCARYeaHR0cHM6Ly93d3cuc3NsLmNvbS9yZXBvc2l0b3J5
+MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATBHBgNVHR8EQDA+MDygOqA4
+hjZodHRwOi8vY3Jscy5zc2wuY29tL1NTTGNvbS1TdWJDQS1FVi1TU0wtRUNDLTM4
+NC1SMi5jcmwwHQYDVR0OBBYEFGdi7S3OKAfy1RgFF7fdu8P1x4+jMA4GA1UdDwEB
+/wQEAwIHgDAPBgkrBgEEAYLaSywEAgUAMIIBfgYKKwYBBAHWeQIEAgSCAW4EggFq
+AWgAdgCzc3cH4YRQ+GOG1gWp3BEJSnktsWcMC4fc8AMOeTalmgAAAYIkSr70AAAE
+AwBHMEUCIH4Uw8bBg4YyD4Mc+AmhxXSv947wzCCbI+dsr5yUE3IpAiEAgBE1Kcfo
+eccO0JMQWAgIbIjBRQ7tWTPFCXG1TDxW5fgAdQCt9776fP8QyIudPZwePhhqtGcp
+Xc+xDCTKhYY069yCigAAAYIkSr+TAAAEAwBGMEQCIC+IWF2S9UjSh2mZxU9ilc42
+kppCwPJQr0QZb7cX+ktxAiAsnxsoEjObNT3U+AjRWpRfnC69GnWenOPwRv/PNlIt
+5gB3AFWB1MIWkDYBSuoLm1c8U/DA5Dh4cCUIFy+jqh0HE9MMAAABgiRKv20AAAQD
+AEgwRgIhAK3Bcys8uEde7y5yZvEpWgOjHtoVuCxg+bk9Nx1MzgUvAiEAlo6rU1cn
+YIWHFu1RfBCMHM3HjkakCwG1UyNY0qIcwtkwCgYIKoZIzj0EAwMDZwAwZAIwLeaz
+Qdf67hG/zQ0An/+yFFZ1jC2oD3+zER9tETT4GqrdECGh0ea3Rl8TlkVJpSF3AjAW
+z0islA6W1//NVOVoUixAi/+dH9Z8xv/+o9kWI8HdIU6zZMnSpDm//lNhIHnp4X8=
+-----END CERTIFICATE-----
+subject=C = US, ST = Texas, L = Houston, O = SSL.com (SSL Corp), serialNumber = NV20081614243, CN = www.ssl.com, businessCategory = Private Organization, jurisdictionST = Nevada, jurisdictionC = US
+
+issuer=C = US, ST = Texas, L = Houston, O = SSL Corp, CN = SSL.com EV SSL Intermediate CA ECC R2
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: ECDSA
+Server Temp Key: ECDH, P-256, 256 bits
+---
+SSL handshake has read 5696 bytes and written 435 bytes
+Verification: OK
+---
+New, TLSv1.2, Cipher is ECDHE-ECDSA-AES128-GCM-SHA256
+Server public key is 384 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-ECDSA-AES128-GCM-SHA256
+    Session-ID: 39FCBDC66647112B8737F234BBC2352D1DA023DB1F258A66A8D2428ED553C425
+    Session-ID-ctx: 
+    Master-Key: 633E4F1579A355A9EA5F5BBEBBFBE0A4FBA58E5EE868266CFC0CEF9AA0DA8CAD618B23A899B57D64622F9124BD729920
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 86400 (seconds)
+    TLS session ticket:
+    0000 - 8b 53 ff 68 45 e0 eb 90-35 f6 54 d9 7b 89 13 d9   .S.hE...5.T.{...
+    0010 - b2 0d a2 5a f5 98 44 24-2c a4 cd 52 dd 14 6b c5   ...Z..D$,..R..k.
+    0020 - 21 ed d1 30 8e 00 d6 6d-10 5a 6a 66 b2 9e 02 f2   !..0...m.Zjf....
+    0030 - 37 6a f1 db e9 51 26 dd-48 d5 91 4a 67 3f a0 91   7j...Q&.H..Jg?..
+    0040 - 60 bc 9b 00 b9 ad cc 4d-fc a1 96 2c 6a 5b 55 d7   `......M...,j[U.
+    0050 - 21 c6 50 46 56 3a 23 43-8f 43 07 1e c4 d7 35 46   !.PFV:#C.C....5F
+    0060 - 22 5e 5e 35 51 ae 99 fe-4a                        "^^5Q...J
+
+    Start Time: 1682348558
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: yes
+---

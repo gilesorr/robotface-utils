@@ -1,0 +1,80 @@
+CONNECTED(00000006)
+---
+Certificate chain
+ 0 s:C = US, ST = Minnesota, L = Shakopee, jurisdictionC = US, jurisdictionST = Delaware, O = Entrust Corporation, businessCategory = Private Organization, serialNumber = 705421, CN = entrust.com
+   i:C = US, O = "Entrust, Inc.", OU = See www.entrust.net/legal-terms, OU = "(c) 2014 Entrust, Inc. - for authorized use only", CN = Entrust Certification Authority - L1M
+ 1 s:C = US, O = "Entrust, Inc.", OU = See www.entrust.net/legal-terms, OU = "(c) 2014 Entrust, Inc. - for authorized use only", CN = Entrust Certification Authority - L1M
+   i:C = US, O = "Entrust, Inc.", OU = www.entrust.net/CPS is incorporated by reference, OU = "(c) 2006 Entrust, Inc.", CN = Entrust Root Certification Authority
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIIxjCCB66gAwIBAgIQAg7xXc47fdytQNNRUL3eyDANBgkqhkiG9w0BAQsFADCB
+ujELMAkGA1UEBhMCVVMxFjAUBgNVBAoTDUVudHJ1c3QsIEluYy4xKDAmBgNVBAsT
+H1NlZSB3d3cuZW50cnVzdC5uZXQvbGVnYWwtdGVybXMxOTA3BgNVBAsTMChjKSAy
+MDE0IEVudHJ1c3QsIEluYy4gLSBmb3IgYXV0aG9yaXplZCB1c2Ugb25seTEuMCwG
+A1UEAxMlRW50cnVzdCBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eSAtIEwxTTAeFw0y
+MjEyMDgxNTExMzRaFw0yMzEyMDcxNTExMzRaMIHIMQswCQYDVQQGEwJVUzESMBAG
+A1UECBMJTWlubmVzb3RhMREwDwYDVQQHEwhTaGFrb3BlZTETMBEGCysGAQQBgjc8
+AgEDEwJVUzEZMBcGCysGAQQBgjc8AgECEwhEZWxhd2FyZTEcMBoGA1UEChMTRW50
+cnVzdCBDb3Jwb3JhdGlvbjEdMBsGA1UEDxMUUHJpdmF0ZSBPcmdhbml6YXRpb24x
+DzANBgNVBAUTBjcwNTQyMTEUMBIGA1UEAxMLZW50cnVzdC5jb20wggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCWDLI2gtxXODHVx3v25C1vznADBhsJtGDf
+yRY3Tx2mWOZDTeancVg5pc7iPdE8yzRlMMDaDS2h/x8n0lQCiOuOhrChKN7WIkvp
+bYF4uCIcFTwb4wWDS62P2CDopGWah51fEqFTOrhXycW7Brqss6D23xtp7J/BsmcP
+BsTMCs4lde9Z5Xwq3OqcaruwRFS8Wxo69uVVHAwHbFOrvdisUNhr2siUe+fHYOox
+ibY/oXQ+dF9c1OVvEdHVRkiooBx5GcxG/qQVK7el6Y5S8EAK/iDtxBc/PvVSRdco
+7VGL+vY44mnVmtbOrlrNFCPG7TRSyQtvbO9LGoEtqHmiCkCeUj+NAgMBAAGjggS2
+MIIEsjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBTBZiuksaC2O2GxdnqkF4xPfp9N
+RjAfBgNVHSMEGDAWgBTD99C1KjCtrw2RIXA5VN28iXDHOjBoBggrBgEFBQcBAQRc
+MFowIwYIKwYBBQUHMAGGF2h0dHA6Ly9vY3NwLmVudHJ1c3QubmV0MDMGCCsGAQUF
+BzAChidodHRwOi8vYWlhLmVudHJ1c3QubmV0L2wxbS1jaGFpbjI1Ni5jZXIwMwYD
+VR0fBCwwKjAooCagJIYiaHR0cDovL2NybC5lbnRydXN0Lm5ldC9sZXZlbDFtLmNy
+bDCCAcUGA1UdEQSCAbwwggG4ggtlbnRydXN0LmNvbYIPd3d3LmVudHJ1c3QuY29t
+giBhY3RpdmF0aW9uLmxpY2Vuc2luZy5lbnRydXN0LmNvbYIPYWRwLmVudHJ1c3Qu
+Y29tghhhdXRvZGlzY292ZXIuZW50cnVzdC5jb22CDmluLmVudHJ1c3QuY29tghVr
+aXRld29ya3MuZW50cnVzdC5jb22CFWxpY2Vuc2luZy5lbnRydXN0LmNvbYIQbWFp
+bC5lbnRydXN0LmNvbYIPbmV3LmVudHJ1c3QuY29tghJvZmluZHMuZW50cnVzdC5j
+b22CE29maW5kczIuZW50cnVzdC5jb22CE29maW5kczMuZW50cnVzdC5jb22CE291
+dGxvb2suZW50cnVzdC5jb22CD3BsbS5lbnRydXN0LmNvbYIQdGVzdC5lbnRydXN0
+LmNvbYIWdGVzdG9ubGluZS5lbnRydXN0LmNvbYIZdGVzdHRyYW5zbGF0ZS5lbnRy
+dXN0LmNvbYIVdHJhbnNsYXRlLmVudHJ1c3QuY29tgg93ZWIuZW50cnVzdC5jb22C
+GXd3dy5raXRld29ya3MuZW50cnVzdC5jb20wDgYDVR0PAQH/BAQDAgWgMB0GA1Ud
+JQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBLBgNVHSAERDBCMDcGCmCGSAGG+mwK
+AQIwKTAnBggrBgEFBQcCARYbaHR0cHM6Ly93d3cuZW50cnVzdC5uZXQvcnBhMAcG
+BWeBDAEBMIIBfAYKKwYBBAHWeQIEAgSCAWwEggFoAWYAdgCzc3cH4YRQ+GOG1gWp
+3BEJSnktsWcMC4fc8AMOeTalmgAAAYTySrvEAAAEAwBHMEUCIFQRumbl+skOUbHl
+/hbn+92L8X8MZk4nMj/RNrjuY+kwAiEA1slrT7NrFCay8xn9putOI0NvH9itPQGM
+wnIBFv1th2QAdQC3Pvsk35xNunXyOcW6WPRsXfxCz3qfNcSeHQmBJe20mQAAAYTy
+SrvlAAAEAwBGMEQCIBBWgarXtiP1ru10rkACIvhG8hbTPUzJHbvGSx3liBF8AiAu
+xN7FEH0X8Fq3tjE1hb0mJj7S+vqq2okrQcQ0lfpkqwB1AOg+0No+9QY1MudXKLyJ
+a8kD08vREWvs62nhd31tBr1uAAABhPJKu7MAAAQDAEYwRAIgVezFjQjKJrarm7Jk
+xCyBXztrIJRGRBdbFMGrFrmK4VgCIHN5DmQ7j4ki8Dytjka5yGc/JX3D34Fgtsa5
+GlzCKLGpMA0GCSqGSIb3DQEBCwUAA4IBAQBu1TEGcDO8HZl4VtwyyA6o2VfUew9k
+Qxt/klE2xk1pPdN6n7PMKG5Fjvrf30rVAClHQ3sgvti7MovZ2E5ysC+pRriFQR4X
+slMMMAmBmG8qqQDJin/h+0lA5Fw2Iz0rwWK/6ce0yvEtp6vGgHMjLlPHdqGxf1Bj
+x1pIgZFbLUxQTT4wiQaWxC7xkZPlohR1eU6IE0C3q0iKLvzlceJnotGLBDV9N79m
+5tlp5RlZQd+z8o6bq8rrFFPkDIWMWoveonX9wKhqiYbq3aXTF2FxfWTSo1N2JPg/
+3eeaCmi758QGMim26JSESS9F0yzd1uwCjnZMxAdkgr8NFGbt6b1XBqoC
+-----END CERTIFICATE-----
+subject=C = US, ST = Minnesota, L = Shakopee, jurisdictionC = US, jurisdictionST = Delaware, O = Entrust Corporation, businessCategory = Private Organization, serialNumber = 705421, CN = entrust.com
+
+issuer=C = US, O = "Entrust, Inc.", OU = See www.entrust.net/legal-terms, OU = "(c) 2014 Entrust, Inc. - for authorized use only", CN = Entrust Certification Authority - L1M
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4059 bytes and written 397 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

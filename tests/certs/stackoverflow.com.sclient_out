@@ -1,0 +1,100 @@
+CONNECTED(00000006)
+---
+Certificate chain
+ 0 s:CN = *.stackexchange.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIHJDCCBgygAwIBAgISA39Mgkn0Ak8ijDPLoxmHUuaeMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMzAzMzAxMzE0MDRaFw0yMzA2MjgxMzE0MDNaMB4xHDAaBgNVBAMM
+Eyouc3RhY2tleGNoYW5nZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+AoIBAQDAa88VdbxQY2E6HvXK/ATlEQiNFxtCWdK6d1YDcvCuKQIRfi9CKLnqugD1
+ahNcxZl6aMKAcw99UxTqS6T7WmBAmSEHt4FoBQzjgWOTpbDV5Xr6xb7rbe9JYMSd
+02lLRFAxKIZMrfnmtroYGAzR0WoPvbzlgvxAcYVEwZHx5n+pqUHRsQKJMLNNeyyJ
+v4AK0yn3Clof2yaRL06mJeNx10ZdiWRZoDEGHx++rDxFdtYZkVuj3yepjsuYpSGc
+mAwb5K0wjfvkBjD+j5z1TjQhuAqzD3dzUPFOjb0M7b9MIDuKDXD8+LvmgQ6eY2mx
+6cZgn81gftEKg2a7TpofDvkmrZHPAgMBAAGjggRGMIIEQjAOBgNVHQ8BAf8EBAMC
+BaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAw
+HQYDVR0OBBYEFBi/3JWGwr7cfOE05KQTScWNK2jeMB8GA1UdIwQYMBaAFBQusxe3
+WFbLrlAJQOYfr52LFMLGMFUGCCsGAQUFBwEBBEkwRzAhBggrBgEFBQcwAYYVaHR0
+cDovL3IzLm8ubGVuY3Iub3JnMCIGCCsGAQUFBzAChhZodHRwOi8vcjMuaS5sZW5j
+ci5vcmcvMIICFgYDVR0RBIICDTCCAgmCDyouYXNrdWJ1bnR1LmNvbYISKi5ibG9n
+b3ZlcmZsb3cuY29tghIqLm1hdGhvdmVyZmxvdy5uZXSCGCoubWV0YS5zdGFja2V4
+Y2hhbmdlLmNvbYIYKi5tZXRhLnN0YWNrb3ZlcmZsb3cuY29tghEqLnNlcnZlcmZh
+dWx0LmNvbYINKi5zc3RhdGljLm5ldIITKi5zdGFja2V4Y2hhbmdlLmNvbYITKi5z
+dGFja292ZXJmbG93LmNvbYIVKi5zdGFja292ZXJmbG93LmVtYWlsghgqLnN0YWNr
+b3ZlcmZsb3d0ZWFtcy5jb22CDyouc3VwZXJ1c2VyLmNvbYINYXNrdWJ1bnR1LmNv
+bYIQYmxvZ292ZXJmbG93LmNvbYIQbWF0aG92ZXJmbG93Lm5ldIIUb3BlbmlkLnN0
+YWNrYXV0aC5jb22CD3NlcnZlcmZhdWx0LmNvbYILc3N0YXRpYy5uZXSCDXN0YWNr
+YXBwcy5jb22CDXN0YWNrYXV0aC5jb22CEXN0YWNrZXhjaGFuZ2UuY29tghJzdGFj
+a292ZXJmbG93LmJsb2eCEXN0YWNrb3ZlcmZsb3cuY29tghNzdGFja292ZXJmbG93
+LmVtYWlsghZzdGFja292ZXJmbG93dGVhbXMuY29tghFzdGFja3NuaXBwZXRzLm5l
+dIINc3VwZXJ1c2VyLmNvbTBMBgNVHSAERTBDMAgGBmeBDAECATA3BgsrBgEEAYLf
+EwEBATAoMCYGCCsGAQUFBwIBFhpodHRwOi8vY3BzLmxldHNlbmNyeXB0Lm9yZzCC
+AQIGCisGAQQB1nkCBAIEgfMEgfAA7gB1AHoyjFTYty22IOo44FIe6YQWcDIThU07
+0ivBOlejUutSAAABhzLeV4sAAAQDAEYwRAIgSGQngzlo74oZ2oAraiCKEcLD2vGF
+gEgqQiLPTrUfdrQCIDuljjOIHK+sMi3hNqgggkXR3kxekLaz30k3uapcA4keAHUA
+rfe++nz/EMiLnT2cHj4YarRnKV3PsQwkyoWGNOvcgooAAAGHMt5XsAAABAMARjBE
+AiAnMuvwRtbRNzFsy1Ob25dqSSaTZP+NRYDyeCxOuq766AIga4uU2oI0XbHZ0TXO
+/IE8YmNDStwsI/v6Qyt/57V3DfgwDQYJKoZIhvcNAQELBQADggEBAAkSonzXKmrN
+cApFzEHxW6Q3VUoDDi3QcKRU49RauhL0CHqeNgy0NL8V5sgIsQpnJvyN/sKErO12
+0BwiDSlJa4A7ge8umFV0eIfZrOzg8/vEOlxnyz53zOjZ1cD390PeqScVoxtY/VeH
+u5P4eaVFIDFkI4BIvzypB/Q/ObuZmUuW4MZYEzfYJF4G9qpAJ1tewtDGwLF1pDZR
+USd8h+wa+5LsEopYFswTkGBKGpLCyIpGEArnwp6C1WfBhh5CHFEKnXxwTPcti79H
+W5fDrIp0w+zPp1K8MUA6fM6FHzTrwot04PXGR0KOuYGvF5esylwgR//Zqv2XsUQo
+L1zBb+IfFdw=
+-----END CERTIFICATE-----
+subject=CN = *.stackexchange.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 5185 bytes and written 412 bytes
+Verification: OK
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES128-GCM-SHA256
+    Session-ID: 89A8121C0D4F484D31008CF2B5ABDF70CE1F2684AE8C010373AB21436EEEEC8A
+    Session-ID-ctx: 
+    Master-Key: C7E4B6CF62DF5968B08F5975A391C60DDB885F17CD0C0AD03856413A42188B4C1B6BA94EB8F1A8584AAF7E03AD027F53
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - cf 9f c0 b1 48 ad 37 a6-fb e6 d2 96 50 cd dc 2e   ....H.7.....P...
+    0010 - 42 da c3 c2 bf 36 1d cc-c9 3d 66 0c cc 54 30 f5   B....6...=f..T0.
+    0020 - 8c a5 b5 f7 18 e8 12 41-12 be 54 37 46 23 ed 07   .......A..T7F#..
+    0030 - 66 47 bc 06 96 7e 92 d7-b5 97 14 c3 2f 04 af 04   fG...~....../...
+    0040 - 6a 55 ec f2 18 43 5d 03-9f 5b 09 1d 19 26 8b b1   jU...C]..[...&..
+    0050 - 8c 98 06 0b ba 55 c1 97-7a 7f 77 5c 73 d4 3a 1c   .....U..z.w\s.:.
+    0060 - d6 44 d2 b7 4d 4a 1d 71-7d 4d 86 c2 a7 ca 79 1d   .D..MJ.q}M....y.
+    0070 - e6 e3 3d a7 70 c6 d3 1c-95 04 09 cb cc eb db 11   ..=.p...........
+    0080 - 31 0a 74 15 77 c4 0a 97-80 cd d0 a8 8e c5 c4 36   1.t.w..........6
+    0090 - 8f 39 d6 2b c2 12 91 52-a1 18 e5 82 40 58 99 4d   .9.+...R....@X.M
+    00a0 - 54 78 96 65 f2 29 41 63-14 25 84 4e d5 97 0e 50   Tx.e.)Ac.%.N...P
+    00b0 - c6 0c d0 1b 14 40 ae 84-89 14 76 f7 f1 9f 1a 3b   .....@....v....;
+
+    Start Time: 1682348557
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: yes
+---

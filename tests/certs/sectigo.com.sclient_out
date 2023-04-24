@@ -1,0 +1,94 @@
+CONNECTED(00000005)
+---
+Certificate chain
+ 0 s:serialNumber = 04058690, jurisdictionC = GB, businessCategory = Private Organization, C = GB, ST = Manchester, O = Sectigo Limited, CN = sectigo.com
+   i:C = GB, ST = Greater Manchester, L = Salford, O = Sectigo Limited, CN = Sectigo RSA Extended Validation Secure Server CA
+ 1 s:C = GB, ST = Greater Manchester, L = Salford, O = Sectigo Limited, CN = Sectigo RSA Extended Validation Secure Server CA
+   i:C = US, ST = New Jersey, L = Jersey City, O = The USERTRUST Network, CN = USERTrust RSA Certification Authority
+ 2 s:C = US, ST = New Jersey, L = Jersey City, O = The USERTRUST Network, CN = USERTrust RSA Certification Authority
+   i:C = GB, ST = Greater Manchester, L = Salford, O = Comodo CA Limited, CN = AAA Certificate Services
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIK6jCCCdKgAwIBAgIQQxKk6Mig7lGnbZ8CFdvCfjANBgkqhkiG9w0BAQsFADCB
+kTELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4G
+A1UEBxMHU2FsZm9yZDEYMBYGA1UEChMPU2VjdGlnbyBMaW1pdGVkMTkwNwYDVQQD
+EzBTZWN0aWdvIFJTQSBFeHRlbmRlZCBWYWxpZGF0aW9uIFNlY3VyZSBTZXJ2ZXIg
+Q0EwHhcNMjMwNDA2MDAwMDAwWhcNMjQwNDA1MjM1OTU5WjCBmTERMA8GA1UEBRMI
+MDQwNTg2OTAxEzARBgsrBgEEAYI3PAIBAxMCR0IxHTAbBgNVBA8TFFByaXZhdGUg
+T3JnYW5pemF0aW9uMQswCQYDVQQGEwJHQjETMBEGA1UECBMKTWFuY2hlc3RlcjEY
+MBYGA1UEChMPU2VjdGlnbyBMaW1pdGVkMRQwEgYDVQQDEwtzZWN0aWdvLmNvbTCC
+ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALOVZYfn4RUNe6RAnmucg22x
+jLaGpDPbmWVqVW9ECyXu0OAolafhLPG7YD6qS6WhJv9YcxpfBMR/YkKdd4VYoumB
+SZg4IfPRdBTPzkP3ZUoZN4N/y2B9jI1ZTQQGHtXrr/CwbfH5bgb7ckhJIXhCz315
+mNoJr2PRTAj9qtIerylST5MIeVw1bH5Nqga/4G14UF2QEPnIFRxECoweOxf7WvWR
+zTcNF5XCi2w7bsJe5EdHKoG5nYQRLlTkVxbdF9Qow1P8OisvE7RiFbaW+qw3bwnR
+DYXLsiwfVEKYN/OHxZccqg6U4z0sFnS1pZ6KKAhsTfqsq70xNWvHHYKkhRfABBMC
+AwEAAaOCBzIwggcuMB8GA1UdIwQYMBaAFCxp/4DJh5CuNOG050yThZlA6aeyMB0G
+A1UdDgQWBBTocdVQz3kXLavUEqXUcqom366eODAOBgNVHQ8BAf8EBAMCBaAwDAYD
+VR0TAQH/BAIwADAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwSQYDVR0g
+BEIwQDA1BgwrBgEEAbIxAQIBBQEwJTAjBggrBgEFBQcCARYXaHR0cHM6Ly9zZWN0
+aWdvLmNvbS9DUFMwBwYFZ4EMAQEwVgYDVR0fBE8wTTBLoEmgR4ZFaHR0cDovL2Ny
+bC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBRXh0ZW5kZWRWYWxpZGF0aW9uU2VjdXJl
+U2VydmVyQ0EuY3JsMIGGBggrBgEFBQcBAQR6MHgwUQYIKwYBBQUHMAKGRWh0dHA6
+Ly9jcnQuc2VjdGlnby5jb20vU2VjdGlnb1JTQUV4dGVuZGVkVmFsaWRhdGlvblNl
+Y3VyZVNlcnZlckNBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGln
+by5jb20wggF+BgorBgEEAdZ5AgQCBIIBbgSCAWoBaAB3AHb/iD8KtvuVUcJhzPWH
+ujS0pM27KdxoQgqf5mdMWjp0AAABh1fkEwMAAAQDAEgwRgIhAP/dzJJ18NY8ev//
+8y2OMvt7GiW/8I7bVl9DbMmK646JAiEA59wsQvJodYw+GY/P6tcriSEtFSKaY6kg
+rvo6mCGXlqcAdQDatr9rP7W2Ip+bwrtca+hwkXFsu1GEhTS9pD0wSNf7qwAAAYdX
+5BNqAAAEAwBGMEQCIGG9GxXCPS0Z6UJa4q/wKAWzOM1wCalKZEhMKLes9pRnAiBx
+KMK0al3DWo45uoT2jJT3HWqumZYrnlnZx58DItHAUQB2AO7N0GTV2xrOxVy3nbTN
+E6Iyh0Z8vOzew1FIWUZxH7WbAAABh1fkEywAAAQDAEcwRQIhAMMB+gkWoAfS74Mr
+O028yFUcNnKLk5qvaXruLXFdgJH+AiA+fqZdJZbKfpk0SYSiA56uRHUjrGhesluz
++r9Kiz3QazCCA/8GA1UdEQSCA/YwggPyggtzZWN0aWdvLmNvbYIOYmV0YS5zc2wy
+NDcuYmWCEWJldGEuc3NsMjQ3LmNvLnVrgg9iZXRhLnNzbDI0Ny5jb22CDmJldGEu
+c3NsMjQ3LmVzgg5iZXRhLnNzbDI0Ny5mcoIOYmV0YS5zc2wyNDcuaWWCDmJldGEu
+c3NsMjQ3Lml0gg5iZXRhLnNzbDI0Ny5zZYIQYmV0YS54b2xwaGluLmNvbYIXYmxv
+Zy5oYWNrZXJndWFyZGlhbi5jb22CE2Jsb2cuaW5zdGFudHNzbC5jb22CFGJsb2cu
+cG9zaXRpdmVzc2wuY29tggxjb21vZG9jYS5jb22CEWVudGVycHJpc2Vzc2wuY29t
+ghRldnNzbGNlcnRpZmljYXRlLmNvbYISaGFja2VyZ3VhcmRpYW4uY29tgg5pbnN0
+YW50c3NsLmNvbYIOb3B0aW11bXNzbC5jb22CD3Bvc2l0aXZlc3NsLmNvbYIQc3Ns
+LmNvbW9kb2NhLmNvbYIJc3NsMjQ3LmJlggxzc2wyNDcuY28udWuCCnNzbDI0Ny5j
+b22CCXNzbDI0Ny5ka4IJc3NsMjQ3LmVzgglzc2wyNDcuZnKCCXNzbDI0Ny5pZYIJ
+c3NsMjQ3Lml0gglzc2wyNDcuc2WCEnN0b3JlLmNvbW9kb2NhLmNvbYIXc3RvcmUu
+ZW50ZXJwcmlzZXNzbC5jb22CGHN0b3JlLmhhY2tlcmd1YXJkaWFuLmNvbYIUc3Rv
+cmUuaW5zdGFudHNzbC5jb22CFXN0b3JlLnBvc2l0aXZlc3NsLmNvbYIRc3RvcmUu
+c2VjdGlnby5jb22CFnN0b3JlLnNzbC5jb21vZG9jYS5jb22CEHN0b3JlLnNzbDI0
+Ny5jb22CEXN0b3JlLnhvbHBoaW4uY29tghB3d3cuY29tb2RvY2EuY29tghV3d3cu
+ZW50ZXJwcmlzZXNzbC5jb22CGHd3dy5ldnNzbGNlcnRpZmljYXRlLmNvbYIWd3d3
+LmhhY2tlcmd1YXJkaWFuLmNvbYISd3d3Lmluc3RhbnRzc2wuY29tghJ3d3cub3B0
+aW11bXNzbC5jb22CE3d3dy5wb3NpdGl2ZXNzbC5jb22CD3d3dy5zZWN0aWdvLmNv
+bYINd3d3LnNzbDI0Ny5iZYIQd3d3LnNzbDI0Ny5jby51a4IOd3d3LnNzbDI0Ny5j
+b22CDXd3dy5zc2wyNDcuZGuCDXd3dy5zc2wyNDcuZXOCDXd3dy5zc2wyNDcuZnKC
+DXd3dy5zc2wyNDcuaWWCDXd3dy5zc2wyNDcuaXSCDXd3dy5zc2wyNDcuc2WCD3d3
+dy54b2xwaGluLmNvbYILeG9scGhpbi5jb20wDQYJKoZIhvcNAQELBQADggEBAAyo
+zBEv2B2UHrZaC2QQLKhoJu7x5pzbbWfiDjolykVoc8FfIg39WtMcmFGAVgQbiXmU
+Q1WE5hDKYV2zU0QlR7kQuYAy5rMPENBGr/HqqxYKx7pxIs/CDJW9vRFB0Q5+I55l
+RyWTbqcDLs4oEQBau1fsYPhWpkcBaJKFHmbA2RB9Rc/sp9xbfQscA5+6M7sq+wVD
+oX5nks9sI7drM7v5IiMwzxtH82XPzNPx3gKfNe9yq2k9HYLDPfMmTD+106fs7LZH
+j3dT/kDuU6g0oE8KDNYy+zBE53VJG30pLPgL406G5V5YehTTp80tTA2fPN/nNGcc
+aqJq5Z8LcpBW4vVC0DE=
+-----END CERTIFICATE-----
+subject=serialNumber = 04058690, jurisdictionC = GB, businessCategory = Private Organization, C = GB, ST = Manchester, O = Sectigo Limited, CN = sectigo.com
+
+issuer=C = GB, ST = Greater Manchester, L = Salford, O = Sectigo Limited, CN = Sectigo RSA Extended Validation Secure Server CA
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 6365 bytes and written 377 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_128_GCM_SHA256
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

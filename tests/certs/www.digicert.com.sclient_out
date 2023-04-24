@@ -1,0 +1,75 @@
+CONNECTED(00000005)
+---
+Certificate chain
+ 0 s:jurisdictionC = US, jurisdictionST = Utah, businessCategory = Private Organization, serialNumber = 5299537-0142, C = US, ST = Utah, L = Lehi, O = "DigiCert, Inc.", CN = www.digicert.com
+   i:C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert SHA2 Extended Validation Server CA
+ 1 s:C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert SHA2 Extended Validation Server CA
+   i:C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert High Assurance EV Root CA
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIHszCCBpugAwIBAgIQDxJYrlHOdQF19jT1kFF4ezANBgkqhkiG9w0BAQsFADB1
+MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+d3cuZGlnaWNlcnQuY29tMTQwMgYDVQQDEytEaWdpQ2VydCBTSEEyIEV4dGVuZGVk
+IFZhbGlkYXRpb24gU2VydmVyIENBMB4XDTIyMDQxODAwMDAwMFoXDTIzMDUwNDIz
+NTk1OVowgcExEzARBgsrBgEEAYI3PAIBAxMCVVMxFTATBgsrBgEEAYI3PAIBAhME
+VXRhaDEdMBsGA1UEDwwUUHJpdmF0ZSBPcmdhbml6YXRpb24xFTATBgNVBAUTDDUy
+OTk1MzctMDE0MjELMAkGA1UEBhMCVVMxDTALBgNVBAgTBFV0YWgxDTALBgNVBAcT
+BExlaGkxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMRkwFwYDVQQDExB3d3cuZGln
+aWNlcnQuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4C8b3NE7
+AbBVlNdawnOyl0f6dMr3F2Cr/ndp/oyYlimU5XKQbXh4IYE+Z/K4KDn3t7RiXg/L
+o3eyjAtOdqq80vWeTlT4zvq+EstyXiSA1I+/DLpX3FDZ12XGys6yMffNdJj2XgOI
+34Lar+scVblaJRBTwINtdkGCqhLi6Dt+Hk0SttztqlDwRaHqOihGeJpX9OR/vINQ
+MndxzV3/EnKXVgAzOZNI1MP4jmTyK5nbtEYBbmHMjK63e8f40bwkhPayFZtcD5x+
+MjzZQqgqFzdrNRtVqdGxMdRO1+Tm8H8KNtTwdqv39gh5YTPQRG8yU0Zae1FpAyyz
+jSuj3itUWhxygwIDAQABo4ID8DCCA+wwHwYDVR0jBBgwFoAUPdNQpdagre7zSmAK
+ZdMh1Pj41g8wHQYDVR0OBBYEFMPfu4B5jDTuw2VxBfXFzoKaYBSXMIGgBgNVHREE
+gZgwgZWCEHd3dy5kaWdpY2VydC5jb22CDGRpZ2ljZXJ0LmNvbYISYWRtaW4uZGln
+aWNlcnQuY29tghBhcGkuZGlnaWNlcnQuY29tghRjb250ZW50LmRpZ2ljZXJ0LmNv
+bYISbG9naW4uZGlnaWNlcnQuY29tghJvcmRlci5kaWdpY2VydC5jb22CD3dzLmRp
+Z2ljZXJ0LmNvbTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEG
+CCsGAQUFBwMCMHUGA1UdHwRuMGwwNKAyoDCGLmh0dHA6Ly9jcmwzLmRpZ2ljZXJ0
+LmNvbS9zaGEyLWV2LXNlcnZlci1nMy5jcmwwNKAyoDCGLmh0dHA6Ly9jcmw0LmRp
+Z2ljZXJ0LmNvbS9zaGEyLWV2LXNlcnZlci1nMy5jcmwwSgYDVR0gBEMwQTALBglg
+hkgBhv1sAgEwMgYFZ4EMAQEwKTAnBggrBgEFBQcCARYbaHR0cDovL3d3dy5kaWdp
+Y2VydC5jb20vQ1BTMIGIBggrBgEFBQcBAQR8MHowJAYIKwYBBQUHMAGGGGh0dHA6
+Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBSBggrBgEFBQcwAoZGaHR0cDovL2NhY2VydHMu
+ZGlnaWNlcnQuY29tL0RpZ2lDZXJ0U0hBMkV4dGVuZGVkVmFsaWRhdGlvblNlcnZl
+ckNBLmNydDAJBgNVHRMEAjAAMIIBfQYKKwYBBAHWeQIEAgSCAW0EggFpAWcAdwCt
+9776fP8QyIudPZwePhhqtGcpXc+xDCTKhYY069yCigAAAYA+VzukAAAEAwBIMEYC
+IQCnz8rdpZWWhelt0l3mDq0fL7IuWWim1b7wNAwrVCp3pAIhAIoqUK4qeiXEyjRg
+if1hJ35wui014wV8kIOKL8V+E5yvAHUANc8ZG7+xbFe/D61MbULLu7YnICZR6j/h
+Ku+oA8M71kwAAAGAPlc7ogAABAMARjBEAiBj9dhmnSuIS1WLnvucYzmztQfypzcv
+F4P3TQUbUdYOcwIgKB8ZTsuzGlHcRF+2TrEoN5d2MrNPSHR/BkpGUZtuWP4AdQCz
+c3cH4YRQ+GOG1gWp3BEJSnktsWcMC4fc8AMOeTalmgAAAYA+VzvaAAAEAwBGMEQC
+IFNRBlJgG4lnsTZFwzcG7BPO7DLDbBbAdShIMY9P9R+FAiA+hD/uX1d/ROwXT/Bq
+iQ4vcUc8J0tUK8jhQtCn/BqI3zANBgkqhkiG9w0BAQsFAAOCAQEANXQDrcthqdzx
+yZJG2Jr2sTqmSIt9tZ11IbcYQnRjXG7VvLUpo90dJLn3wq/WrCLkToWsz52bblsX
+cPFrKWdakO4t+XL97lL8Vl3v4gaYMVh7shef1NR1WuXwvs948635N+ZIF4G6HQc7
+u5KxBeR7KuvVPecW7k016ZnUY89VPxaqBpOTW6piDXQMElVgNIKgODV2e1QDafAk
+CRVI30jpb0g/uEoGiJd1OHZGiwWYOsPlG+jiUDET9NOzCVbabHk3PDiHPlBLp3Lp
+Hq0l9g8vXKHRdEo79HbvaP4oBm220OE3fdU/v2y5AQlwQffVwgAOPQHUebNp5JYU
+J36oetLA1g==
+-----END CERTIFICATE-----
+subject=jurisdictionC = US, jurisdictionST = Utah, businessCategory = Private Organization, serialNumber = 5299537-0142, C = US, ST = Utah, L = Lehi, O = "DigiCert, Inc.", CN = www.digicert.com
+
+issuer=C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert SHA2 Extended Validation Server CA
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 3734 bytes and written 382 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_128_GCM_SHA256
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

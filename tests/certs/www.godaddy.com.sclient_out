@@ -1,0 +1,70 @@
+CONNECTED(00000005)
+---
+Certificate chain
+ 0 s:C = US, ST = Arizona, L = Tempe, O = GoDaddy Inc., CN = *.godaddy.com
+   i:C = US, ST = Arizona, L = Scottsdale, O = "GoDaddy.com, Inc.", OU = http://certs.godaddy.com/repository/, CN = Go Daddy Secure Certificate Authority - G2
+ 1 s:C = US, ST = Arizona, L = Scottsdale, O = "GoDaddy.com, Inc.", OU = http://certs.godaddy.com/repository/, CN = Go Daddy Secure Certificate Authority - G2
+   i:C = US, ST = Arizona, L = Scottsdale, O = "GoDaddy.com, Inc.", CN = Go Daddy Root Certificate Authority - G2
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIGzzCCBbegAwIBAgIIOO/LjjLYUX0wDQYJKoZIhvcNAQELBQAwgbQxCzAJBgNV
+BAYTAlVTMRAwDgYDVQQIEwdBcml6b25hMRMwEQYDVQQHEwpTY290dHNkYWxlMRow
+GAYDVQQKExFHb0RhZGR5LmNvbSwgSW5jLjEtMCsGA1UECxMkaHR0cDovL2NlcnRz
+LmdvZGFkZHkuY29tL3JlcG9zaXRvcnkvMTMwMQYDVQQDEypHbyBEYWRkeSBTZWN1
+cmUgQ2VydGlmaWNhdGUgQXV0aG9yaXR5IC0gRzIwHhcNMjIxMDAzMTgwNjEwWhcN
+MjMxMTA0MTgwNjEwWjBeMQswCQYDVQQGEwJVUzEQMA4GA1UECBMHQXJpem9uYTEO
+MAwGA1UEBxMFVGVtcGUxFTATBgNVBAoTDEdvRGFkZHkgSW5jLjEWMBQGA1UEAwwN
+Ki5nb2RhZGR5LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANqS
+86YIZz98gSAD6lh2yov2IkBPJFDcGfp9W9fGgx61YRv3RXkFmPENH0s/JnxvU4t3
+5W4CXGo1FwyCoD2IsTNcHg7UcczVAP2dJ2V+PB+Xtof1tpyymSknM0i9gamUNupo
+HtF6V24QaRlFY+gJdLw9U7B7fnGVyErp7NMhj63KVADeGUMVOZI/GBg0sCRAp1tj
+Uc9sAo2tuABWhMYpjixhMgLlsv6Svx39yCpMdoj+dVRmArlgmzhrQb9xRMFi6wRM
+vc+8ul/Rto0yeqEStQfnLTQNAiCT4pBcYQV2uHTLD1MsjUE3zH0ZhAASHroEcvua
+iIhUOSJ/xLkd8dKVJZ0CAwEAAaOCAzgwggM0MAwGA1UdEwEB/wQCMAAwHQYDVR0l
+BBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMA4GA1UdDwEB/wQEAwIFoDA2BgNVHR8E
+LzAtMCugKaAnhiVodHRwOi8vY3JsLmdvZGFkZHkuY29tL2dkaWcyczItMzAuY3Js
+MF0GA1UdIARWMFQwSAYLYIZIAYb9bQEHFwIwOTA3BggrBgEFBQcCARYraHR0cDov
+L2NlcnRpZmljYXRlcy5nb2RhZGR5LmNvbS9yZXBvc2l0b3J5LzAIBgZngQwBAgIw
+dgYIKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5nb2RhZGR5
+LmNvbS8wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jZXJ0aWZpY2F0ZXMuZ29kYWRkeS5j
+b20vcmVwb3NpdG9yeS9nZGlnMi5jcnQwHwYDVR0jBBgwFoAUQMK9J47MNIMwojPX
++2yz8LQsgM4wJQYDVR0RBB4wHIINKi5nb2RhZGR5LmNvbYILZ29kYWRkeS5jb20w
+HQYDVR0OBBYEFLOcsjbDL+Jm8GIrR8b4iOY4xMGxMIIBfQYKKwYBBAHWeQIEAgSC
+AW0EggFpAWcAdgDoPtDaPvUGNTLnVyi8iWvJA9PL0RFr7Otp4Xd9bQa9bgAAAYOf
+BuHiAAAEAwBHMEUCIQDemDxDp6ynAVrvZfXjw7DVOK5rUCV9ATVqEO6GFSIDLQIg
+JBdkHJ/bR4MjIDvwOvXEhs5KVnJXS3sgQgFJkBBBhz8AdgB6MoxU2LcttiDqOOBS
+HumEFnAyE4VNO9IrwTpXo1LrUgAAAYOfBuOvAAAEAwBHMEUCIQDMYO0Iv6EQFBUl
+zfjXYBE0EDlJWewFFGShl7sqFS3ZEgIgeb7LhtAGOuqEEAmTBdBKSzxcf5to+xwX
+v4qwT6tbkG4AdQBVgdTCFpA2AUrqC5tXPFPwwOQ4eHAlCBcvo6odBxPTDAAAAYOf
+BuS/AAAEAwBGMEQCIBnvwikcoaDjqZUCaK25VVgDP37QviKCE4BDtAhKiVaHAiBe
+NmUIQzn9Py94kB5V5GeFEEH9k9p5jCPYLwiFrf5pEjANBgkqhkiG9w0BAQsFAAOC
+AQEAOL3J/RoNpYoAy/HOeMCRh6hTE313v1RLFISbEEKc5X0tGHCfDyuEB2tJ57BD
+Q9LW8l7nfdefi+z0snR1vXuts6QQnxnJtemAB7brICcW56BaMlZ0BCm7V0gPhdAW
+9f/9e9uDj55Z5uvrqVcMVToi1nxNmaRB5pWz0leIvz9lsckrmdjrYTCibswrgZ7W
+NR32MPIoavFIuK6i7p/4cCkx1F9sNxyYVTLM2FapIkefL0n0i4e8jLVvCjgNBunl
+tuwKcX3/eeVoCl76kVYYj8Ww/6rhr8NzfGgWJNXxmm2xi+FkOPBFzVTPyPbfNhFN
+h8rSwM0Q5RqNnqbkTc7Q0TxRXw==
+-----END CERTIFICATE-----
+subject=C = US, ST = Arizona, L = Tempe, O = GoDaddy Inc., CN = *.godaddy.com
+
+issuer=C = US, ST = Arizona, L = Scottsdale, O = "GoDaddy.com, Inc.", OU = http://certs.godaddy.com/repository/, CN = Go Daddy Secure Certificate Authority - G2
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 3558 bytes and written 397 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

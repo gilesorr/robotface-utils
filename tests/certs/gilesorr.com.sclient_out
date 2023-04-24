@@ -1,0 +1,63 @@
+CONNECTED(00000005)
+---
+Certificate chain
+ 0 s:CN = gilesorr.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFHjCCBAagAwIBAgISBEVVCzvc+fr2JrR1/McjTBVsMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMzA0MDIxMjM2NDNaFw0yMzA3MDExMjM2NDJaMBcxFTATBgNVBAMT
+DGdpbGVzb3JyLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMAp
+V/+eVNcZOHDAUqq21P1mbdtfPwVIX9SMz9tcLIRVuhvFkYZ+vMjQtkOjMbFQivs+
+Bq04btT4CJ3tGro3xd9ux7bd5u5FAvxxJSLCK6GVyXdSdtYs1eG+m5ifWmCNNzVh
+1NK9VEtYnCqqFbLQVeBx3XQBDur2vgdVDO5ZxjJtFz0umA81XCkZAO7wT2g9ms14
++uctilF95LiMmfUrd9CPGXFdbQLBvEuCNfLYk4sVCfMc435wIMzL0FzeYOcYQNRv
+nsCr8f/EYHPTMlZkJE3EfvHh9fNwUEXFMGBvsiZ9ZBX1+O6DQFgmK80Z8uWs2lWd
+s7xRC9x1aLfS4a+deYkCAwEAAaOCAkcwggJDMA4GA1UdDwEB/wQEAwIFoDAdBgNV
+HSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4E
+FgQUVaYOdcEj8ocPHP1w7+jn60SigbowHwYDVR0jBBgwFoAUFC6zF7dYVsuuUAlA
+5h+vnYsUwsYwVQYIKwYBBQUHAQEESTBHMCEGCCsGAQUFBzABhhVodHRwOi8vcjMu
+by5sZW5jci5vcmcwIgYIKwYBBQUHMAKGFmh0dHA6Ly9yMy5pLmxlbmNyLm9yZy8w
+FwYDVR0RBBAwDoIMZ2lsZXNvcnIuY29tMEwGA1UdIARFMEMwCAYGZ4EMAQIBMDcG
+CysGAQQBgt8TAQEBMCgwJgYIKwYBBQUHAgEWGmh0dHA6Ly9jcHMubGV0c2VuY3J5
+cHQub3JnMIIBBAYKKwYBBAHWeQIEAgSB9QSB8gDwAHcAtz77JN+cTbp18jnFulj0
+bF38Qs96nzXEnh0JgSXttJkAAAGHQi83pwAABAMASDBGAiEAmVlQRhvc0u9CuU67
+yw+TgSqYVsb+Xd0YgxsiWnu/7RgCIQCN+CzgJvPtsPFNP51sOt5xLI/XQSt9AcbL
+77ZbQDiEEwB1AK33vvp8/xDIi509nB4+GGq0Zyldz7EMJMqFhjTr3IKKAAABh0Iv
+N94AAAQDAEYwRAIgBgzeZgCF6mym/GlfLp7NwM21A86wMiGzPoxK2qg0SMsCIGHT
+gUo8OX3VTbXRXPhP4oSj3JBXOr/1ivTGM0mJHk1UMA0GCSqGSIb3DQEBCwUAA4IB
+AQB0l0nc/JCMw57DZ3GH0qywAgrZgPbEC2+Sv9BE5F0D71sH6HN4wEreZUgrae/Z
+T74OVLoA2AKNZo/KpQr8NIA/vMl+AfmFFH9Q6hVSiJF+3M/7kZKUVTP1sjropLHr
+ToYcnNaeTGpAk9mRK/kDNqoHCs5/RknW5G9g7bjJ2dWBKDYDdJfEbvGAZb3Wfxwa
+hB/YL+Ix8ivUqa5W9Y0vfm+0X9JygKX7e5kjOZ4podOZkY9HQV98y3nnHpLerhfg
+MujW6tdsyUDu+lTnTTbolgbzXxYQ3n66NYm/CnANhbdkloNXutkIzVRkvnHqPCDk
+PMqRTjbgjuKO4A8KzpUXYHCy
+-----END CERTIFICATE-----
+subject=CN = gilesorr.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4570 bytes and written 394 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
