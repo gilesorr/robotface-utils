@@ -75,20 +75,6 @@ source "$(dirname "${0}")/robotface_utils"
 
 
 ######################################################################
-#                        Check for GNU 'date'
-######################################################################
-# There may be a better way to test.  Send a PR if you know it.
-
-# if it barfs on a long option ("--help") assume it's not GNU:
-if date --help > /dev/null 2>&1
-then
-    is_GNU_date="true"
-else
-    is_GNU_date="false"
-fi
-
-
-######################################################################
 #                        Help / Usage
 ######################################################################
 
@@ -129,32 +115,23 @@ dateandissuer () {
     # from one name to another getting the cert of the redirect domain.
     sclient_out="$(echo | ${OPENSSL} s_client -connect "${1}:443" -servername "${1}" 2>/dev/null)"
     issuer="$(certissuer "${sclient_out}")"
-
     ugly_date="$(echo "${sclient_out}" | ${OPENSSL} x509 -noout -dates | grep notAfter | awk 'BEGIN { FS="=" } { print $2 }')"
     # 'man strftime' to find more about date formatting
     # and http://stackoverflow.com/questions/1842634/parse-date-in-bash
     # 'date' behaves very differently between Mac and GNU 'date', handle
     # separately.
-    if [[ ${ugly_date} == *"GMT"* ]]
+    if ! [[ ${ugly_date} == *"GMT"* ]]
     then
-        if ${is_GNU_date}
-        then
-            expiry_epoch_seconds=$(date '+%s' -d "${ugly_date}")
-        else # assuming Mac
-            expiry_epoch_seconds=$(date -jf '%b %e %H:%M:%S %Y %Z' "${ugly_date}" "+%s")
-        fi
-        # and we convert to seconds from the Unix Epoch ...
-        now_epoch_seconds=$(date "+%s")
+        echo -e "${WARNING_COLOUR}Date retrieved but not readable${NO_COLOUR} "
+    else
         ugly_date_sans_time="$(echo "${ugly_date}" | sed -e 's/ [012][0-9]:[0-5][0-9]:[0-5][0-9] /, /' -e 's/ GMT//' )"
-        if [ $(( expiry_epoch_seconds - now_epoch_seconds )) -gt $(( EXPIRY_ALARM_DAYS * 60 * 60 * 24 )) ]
+        if [ $(certdaystoexpiry "${sclient_out}") -gt ${EXPIRY_ALARM_DAYS} ]
         then
             echo -n "${ugly_date_sans_time} "
         else
             echo -en "${EXPIRY_COLOUR}${ugly_date_sans_time}${NO_COLOUR} "
         fi
         echo "(${issuer})"
-    else
-        echo -e "${WARNING_COLOUR}Date retrieved but not readable${NO_COLOUR} "
     fi
 }
 

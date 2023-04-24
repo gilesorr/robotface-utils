@@ -16,6 +16,7 @@
 #
 # TODO:
 
+
 ######################################################################
 #                    certdaystoexpiry
 ######################################################################
@@ -23,7 +24,6 @@
 # This does date math, but it's specific to the date format of certificates
 # (perhaps not on Linux, but definitely if on Mac).
 
-# days_to_expiry -> certdaystoexpiry
 certdaystoexpiry() {
     expiry_date="$(certexpirydate "${1}")"
     if date --version 2>/dev/null | grep -q GNU
@@ -47,7 +47,6 @@ certdaystoexpiry() {
 # Given the output of 'openssl s_client <url>', this will return the expiry
 # date of the certificate.
 
-# expiry_date -> certexpirydate
 certexpirydate() {
     echo "${1}" | ${OPENSSL} x509 -noout -dates | awk 'BEGIN { FS="=" } /notAfter/ { print $2 }'
 }
