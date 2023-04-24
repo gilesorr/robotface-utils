@@ -3,6 +3,10 @@
 #
 # This is a library of functions used by other <|°_°|> Bash scripts.
 #
+# certdaystoexpiry() - given s_client output, return day count until
+#   certificate expires
+# certexpirydate() - given s_client output, return certificate expiry date
+# certissuer() - given s_client output, returns the issuer name
 # dnsmatch() - given an FQDN and the list of DNS names from a certificate,
 #   see if there's a match.  Returns 0/1
 # findtls13curl() - returns path to curl with TLS 1.3 or empty
@@ -12,16 +16,80 @@
 #
 # TODO:
 
+######################################################################
+#                    certdaystoexpiry
+######################################################################
+# Given the output of 'openssl s_client <url>', this will return the name.
+# This does date math, but it's specific to the date format of certificates
+# (perhaps not on Linux, but definitely if on Mac).
+
+# days_to_expiry -> certdaystoexpiry
+certdaystoexpiry() {
+    expiry_date="$(certexpirydate "${1}")"
+    if date --version 2>/dev/null | grep -q GNU
+    then
+        # Linux (or at least GNU)
+        expiry_epoch_seconds=$(date --date="${expiry_date}" "+%s")
+    else
+        # Assuming the Mac version:
+        expiry_epoch_seconds=$(date -jf '%b %e %H:%M:%S %Y %Z' "${expiry_date}" "+%s")
+    fi
+    # and we convert to seconds from the Unix Epoch ...
+    now_epoch_seconds=$(date "+%s")
+    seconds_to_expiry=$(( expiry_epoch_seconds - now_epoch_seconds ))
+    echo "$(( seconds_to_expiry / 60 / 60 / 24 ))"
+}
+
 
 ######################################################################
-#                    findtls13curl
+#                    certexpirydate
 ######################################################################
-# Finds 'curl' that supports TLS 1.3 or returns an empty string
-# Thanks: https://unix.stackexchange.com/questions/672792/determine-tls-versions-supported-by-curl
+# Given the output of 'openssl s_client <url>', this will return the expiry
+# date of the certificate.
+
+# expiry_date -> certexpirydate
+certexpirydate() {
+    echo "${1}" | ${OPENSSL} x509 -noout -dates | awk 'BEGIN { FS="=" } /notAfter/ { print $2 }'
+}
+
+
+######################################################################
+#                    certissuer
+######################################################################
+# Given the output of 'openssl s_client <url>', this will return the name
+# of the certificate issuer.
+
+certissuer () {
+    # I apologize if this makes you cringe.  I'm not happy with it either.
+    # We need to get the "issuer" line from the certificate, and then break
+    # that line up based on commas ... but only if the commas aren't inside
+    # double quotes (read
+    # https://stackoverflow.com/questions/13475535/replace-every-comma-not-enclosed-in-a-pair-of-double-quotes-with
+    # ).  This put the pieces on separate lines, and we look for " O =
+    # ...", which means we need the second item if we use awk to break the
+    # line on the equals signs.  Finally strip leading and trailing
+    # whitespace.
+    issuer="$(echo    "${1}" \
+        | ${OPENSSL} x509 -noout -issuer \
+        | sed -e ':a;s/^\(\("[^"]*"\|[^",]*\)*\),/\1\n/;ta' \
+        | grep "^ *O *= *" \
+        | awk -F'=' '{ print $2 }' \
+        | sed -e 's/ *\(.*\) */\1/' \
+        )"
+    echo "${issuer}"
+}
+
+######################################################################
+#                    dnsmatch
+######################################################################
+# Given an FQDN and the "DNS:" entries from a certificate (which is itself
+# just a comma-separated list of domains - although it may contain
+# wildcards), see if the certificate is for the FQDN.
+#
+# NOTE: dnsEntries should be passed in as a separate string, not as
+# multiple strings.
 
 dnsmatch () {
-    # Given an FQDN and the dnsEntries from a certificate, see if the
-    # certificate is for the FQDN.
     FQDN="${1}"
     dnsEntries="${2}"
     if [[ ${dnsEntries} =~ ${FQDN} ]]
@@ -49,6 +117,13 @@ dnsmatch () {
         return 1
     fi
 }
+
+
+######################################################################
+#                    findtls13curl
+######################################################################
+# Finds 'curl' that supports TLS 1.3 or returns an empty string
+# Thanks: https://unix.stackexchange.com/questions/672792/determine-tls-versions-supported-by-curl
 
 findtls13curl () {
     # In 2021 Apple's 'curl' didn't support TLS 1.3.  By macOS Monterey this

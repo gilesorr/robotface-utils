@@ -45,26 +45,6 @@ EOF
 #                       Utility Functions
 ######################################################################
 
-expiry_date() {
-    echo "${1}" | ${OPENSSL} x509 -noout -dates | awk 'BEGIN { FS="=" } /notAfter/ { print $2 }'
-}
-
-days_to_expiry() {
-    expiry_date="$(expiry_date "${1}")"
-    if date --version 2>/dev/null | grep -q GNU
-    then
-        # Linux (or at least GNU)
-        expiry_epoch_seconds=$(date --date="${expiry_date}" "+%s")
-    else
-        # Assuming the Mac version:
-        expiry_epoch_seconds=$(date -jf '%b %e %H:%M:%S %Y %Z' "${expiry_date}" "+%s")
-    fi
-    # and we convert to seconds from the Unix Epoch ...
-    now_epoch_seconds=$(date "+%s")
-    seconds_to_expiry=$(( expiry_epoch_seconds - now_epoch_seconds ))
-    echo "$(( seconds_to_expiry / 60 / 60 / 24 ))"
-}
-
 issuer() {
     echo "${1}" | ${OPENSSL} x509 -noout -issuer | awk -F "=" '{ print $4 }' | sed -e 's@/.*@@' | sed -e 's/^ *//'
 }
@@ -226,7 +206,7 @@ else
             echo -e "${WARNING_COLOUR}${dnsentries} (no match)${NO_COLOUR}"
         fi
 
-        echo "Expiry Date:    $(expiry_date "${sclient_out}") ($(days_to_expiry "${sclient_out}") days)"
+        echo "Expiry Date:    $(certexpirydate "${sclient_out}") ($(certdaystoexpiry "${sclient_out}") days)"
         echo "Issuer:         $(issuer "${sclient_out}")"
         echo "TLS Versions:   $(tlsversions "${domain_name}")"
         echo "HTTP Version:   $(httpversion "${domain_name}")"

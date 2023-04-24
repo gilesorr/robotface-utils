@@ -1,0 +1,24 @@
+# Any line starting with a hash is considered a comment.  Leading
+# whitespace is okay.  Empty lines are ignored.
+
+# The following are useful (as of 2023-04-15) for testing:
+# single:
+gilesorr.com
+# two variants:
+howtouselinux.com
+# several dozen variants:
+secure.newegg.com
+# wildcard:
+www.google.ca
+# multi-wildcard:
+stackoverflow.com
+
+# certificate providers:
+letsencrypt.org
+www.godaddy.com
+ssl.com
+sectigo.com
+globalsign.com
+www.digicert.com
+www.entrust.com
+

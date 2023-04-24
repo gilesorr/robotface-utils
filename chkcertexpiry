@@ -14,8 +14,14 @@
 #   distinguish) (done in 'tlsdetails')
 # - add a command line switch to not display "good" (not expiring soon, no
 #   errors) certificates
+# - wrap/preface 'openssl s_client ...' with the GNU 'timeout' command?
+#   I've had little problem with s_client hanging, but when it does, the
+#   time-out period is very long
+# - make functions more atomic, and move them to robotface_utils
 #
 # RECENTLY ADDDED:
+# - 2023-04-23: better filtering of issuer name (problems with quotes and
+#   commas thought to be fixed)
 # - 2023-04-12: comments and empty lines filtered out of URL files
 # - 2023-04-12: -n <count> to change cert warning days
 #
@@ -122,23 +128,9 @@ dateandissuer () {
     # openssl subcommands.  '-servername' was added to prevent redirects
     # from one name to another getting the cert of the redirect domain.
     sclient_out="$(echo | ${OPENSSL} s_client -connect "${1}:443" -servername "${1}" 2>/dev/null)"
+    issuer="$(certissuer "${sclient_out}")"
+
     ugly_date="$(echo "${sclient_out}" | ${OPENSSL} x509 -noout -dates | grep notAfter | awk 'BEGIN { FS="=" } { print $2 }')"
-    # You would think Ctrl-V-Ctrl-M would work here, but no: we have to
-    # split across two lines (backslash is also required, and watch out for
-    # Vim trying to indent the second line! - should be flush left):
-    # 2020-04 further updated after an 'openssl' update introducing
-    # spaces around the "=" signs, this handles with and without(?).
-    #shellcheck disable=SC1004
-    issuer="$(echo    "${sclient_out}" \
-        | ${OPENSSL} x509 -noout -issuer \
-        | sed -e 's@/@\
-@g' \
-        | sed -e 's@, @\
-@g' \
-        | grep -E '^O ?= ?' \
-        | awk -F "=" '{ print $2 }' \
-        | sed -e 's@^ @@' \
-        )"
     # 'man strftime' to find more about date formatting
     # and http://stackoverflow.com/questions/1842634/parse-date-in-bash
     # 'date' behaves very differently between Mac and GNU 'date', handle
