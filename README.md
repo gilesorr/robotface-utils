@@ -2,6 +2,14 @@
 
 Website-related utility scripts.
 
+## WARNING:
+
+2023-04-24: Currently busted on Mac as I committed without testing some
+`sed` text manipulation with the BSD version of `sed` first.  Works fine on
+Linux (with GNU `sed`).  Will attempt to fix in the next couple days.
+
+## Introduction
+
 This set of utility scripts (initially two, and a library they both use)
 were born out of my work at Toronto Public Library.  When I told some
 friends about the `chkcertexpiry` script, they thought it was worth
