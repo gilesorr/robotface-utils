@@ -21,7 +21,7 @@ EOF
     exit 1
 fi
 
-source ../robotface_utils
+source "$(dirname "${0}")/../robotface_utils"
 
 testSingleDomain() {
     assertTrue 'gilesorr.com did not match gilesorr.com.' \

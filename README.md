@@ -2,12 +2,6 @@
 
 Website-related utility scripts.
 
-## WARNING:
-
-2023-04-24: Currently busted on Mac as I committed without testing some
-`sed` text manipulation with the BSD version of `sed` first.  Works fine on
-Linux (with GNU `sed`).  Will attempt to fix in the next couple days.
-
 ## Introduction
 
 This set of utility scripts (initially two, and a library they both use)
@@ -33,7 +27,7 @@ In 2021 - after TLS v1.3 came into wide use - macOS's versions of `curl`
 and `openssl` still didn't support TLS v1.3.  As an attempt to support
 people on older Macs, the `robotface_utils` library used by both scripts
 attempts to detect other versions of those two programs - notably the
-Homebrew versions which are (possibly) better and (have been) more
+Homebrew versions which are (possibly) better and usually more
 up-to-date.  If the detection seems to be causing problems or you're sure
 you have a modern version of the OS (I know everything's fine with both
 Monterey and Ventura on Intel or Mac silicon), use `-s` to use the system
