@@ -5,11 +5,22 @@ Website-related utility scripts.
 ## Introduction
 
 This set of utility scripts (initially two, and a library they both use)
-were born out of my work at Toronto Public Library.  When I told some
-friends about the `chkcertexpiry` script, they thought it was worth
-sharing.  My bosses graciously agreed to me publicly releasing these
-scripts, which were written and are maintained as part of my work at TPL.
-I hope they're useful.
+were born out of my work at <a href="https://tpl.ca">Toronto Public
+Library</a> (<a href="https://github.com/TorontoPublicLibrary/">TPL Open
+Projects at GitHub</a>).  When I told some friends about the
+`chkcertexpiry` script, they thought it was worth sharing.  My bosses
+graciously agreed to me publicly releasing these scripts, which were
+written and are maintained as part of my work at TPL.  I hope they're
+useful.
+
+## OS Support
+
+This is developed on both an Apple-Silicon Mac and Linux machines (mostly
+Debian, occasionally Fedora).  Some commits I think are innocuous may be
+made with incomplete testing, but generally this should run fine on any of
+these platforms.
+
+Please use tagged releases: they're generally better tested.
 
 ## chkcertexpiry
 
@@ -20,6 +31,8 @@ Run the script to see a help message.
 
 Check a few more details of an individual website, the address of which is
 passed on the command line.  Again: run the script to see a help message.
+
+![utilities in action (v0.2)](images/v0.2.png)
 
 ## If You're Using a Mac ...
 
