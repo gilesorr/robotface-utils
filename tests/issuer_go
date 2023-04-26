@@ -1,0 +1,217 @@
+#!/usr/bin/env bash
+#
+#   Filename:      issuer_go
+#   Created:       2023-04-25
+#   Last Modified: 2023-04-25
+#   Purpose:       Compare "issuer" output from openssl and libressl
+
+B_RED="\033[1;31m"
+B_GREEN="\033[1;32m"
+B_YELLOW="\033[1;33m"
+NO_COLOUR="\033[0;0m"
+
+CERT_COLOUR="${B_YELLOW}"
+SSL_COLOUR="${B_RED}"
+
+usage () {
+    # This function is never called ...
+    cat << EOF
+Usage: $(basename "${0}")
+   Run a series of tests with openssl and libressl to compare issuer output.
+EOF
+}
+
+check4libressl () {
+    if ${1} version | grep -i libressl > /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+check4openssl () {
+    if ${1} version | grep -i openssl > /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+checkxssl4tls13 () {
+    ${1} --tlsv1.3 --silent --connect-timeout 1 --url 'http://localhost:1' 2>/dev/null
+    if [[ $? -ne 2 ]]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+check4gsed () {
+    # This isn't a totally accurate answer, but GNU sed supports this
+    # option, and Apple's sed fails on long options.
+    if ${1} --version >/dev/null 2>/dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+issuer_gnused1 () {
+    echo "${1}" | awk -F "=" '{ print $4 }' | ${GNUSED} -e 's@/.*@@' | ${GNUSED} -e 's/^ *//'
+}
+
+issuer_bsdsed1 () {
+    echo "${1}" | awk -F "=" '{ print $4 }' | ${BSDSED} -e 's@/.*@@' | ${BSDSED} -e 's/^ *//'
+}
+
+issuer_gnused2 () {
+    # ripped from robotface_utils, try to tweak to fix.
+    #
+    # I apologize if this makes you cringe.  I'm not happy with it either.
+    # We need to get the "issuer" line from the certificate, and then break
+    # that line up based on commas ... but only if the commas aren't inside
+    # double quotes (read
+    # https://stackoverflow.com/questions/13475535/replace-every-comma-not-enclosed-in-a-pair-of-double-quotes-with
+    # ).  This put the pieces on separate lines, and we look for " O =
+    # ...", which means we need the second item if we use awk to break the
+    # line on the equals signs.  Finally strip leading and trailing
+    # whitespace.
+    #
+    issuer="$(echo    "${1}" \
+        | ${GNUSED} -e ':a;s/^\(\("[^"]*"\|[^",]*\)*\),/\1\n/;ta' \
+        | grep "^ *O *= *" \
+        | awk -F'=' '{ print $2 }' \
+        | ${GNUSED} -e 's/ *\(.*\) */\1/' \
+        )"
+    echo "${issuer}"
+}
+
+issuer_bsdsed2 () {
+    issuer="$(echo    "${1}" \
+        | ${BSDSED} -e ':a;s/^\(\("[^"]*"\|[^",]*\)*\),/\1\n/;ta' \
+        | grep "^ *O *= *" \
+        | awk -F'=' '{ print $2 }' \
+        | ${BSDSED} -e 's/ *\(.*\) */\1/' \
+        )"
+    echo "${issuer}"
+}
+
+issuer_neutralsed () {
+    # This is an attempt to use the output of either openssl or libressl
+    # with either variety of sed ...
+    #
+    # Miraculously, this appears to work with both SSL tools, and both
+    # versions of sed ...
+
+    MYSED="${BSDSED}"
+    #MYSED="${GNUSED}"
+
+    # remove spaces around the equals sign:
+    compressedline="$(echo "${1#issuer=}" | ${MYSED} -e 's/ =/=/g' -e 's/= /=/g')"
+
+    # if LibreSSL, there's still a leading slash - let's lose that:
+    tmp="${compressedline%/}"
+
+    # now split on [/,][A-Z]+= retaining the ([A-Z]+=) onto separate lines:
+    splits="$(echo "${tmp}" | ${MYSED} -e 's_[/,] *\([A-Z][A-Z]*=\)_\n\1_g')"
+    theO="$(echo "${splits}" | grep "^O=" | ${MYSED} -e 's/^O=//')"
+    echo "${theO}"
+}
+
+###############################################################################
+#                               Main
+###############################################################################
+
+cat << EOF
+This test script will only run under specific circumstances.  It was
+written 2023-04 to test combinations of LibreSSL or OpenSSL with GNU sed
+or BSD sed.  Paths in the script point to specific binaries, and are set
+in a way that imply an Apple Silicon Mac with Homebrew.  This may be
+achievable on other platforms, but will require - at the very least -
+changing the binary paths in the script.
+
+The (apparently ...) successful solution involved using only the simplest
+sed commands that worked on both BSD and GNU sed to massage the output
+of
+    '\$SSL s_client -connect \$url:443 -servername $url 2>/dev/null \
+        | \$SSL x509 -noout -issuer
+
+into relatively similar forms that could be split on similar values.
+
+For now it looks like issuer_neutralsed() is the way forward ...
+
+EOF
+
+LIBRESSL="/usr/bin/openssl"
+OPENSSL='/opt/homebrew/opt/openssl@1.1/bin/openssl'
+GNUSED='/opt/homebrew/bin/gsed'
+BSDSED='/usr/bin/sed'
+
+# TEST OUR BINARIES:
+
+if check4libressl "${LIBRESSL}"
+then
+    echo "LibreSSL found at '${LIBRESSL}', proceeding."
+else
+    echo "'${LIBRESSL}' is NOT LibreSSL, exiting!"
+    exit 1
+fi
+if check4openssl "${OPENSSL}"
+then
+    echo "OpenSSL found at '${OPENSSL}', proceeding."
+else
+    echo "'${OPENSSL}' is NOT OpenSSL, exiting!"
+    exit 1
+fi
+if check4gsed "${GNUSED}"
+then
+    echo "GNU sed found at '${GNUSED}', proceeding."
+else
+    echo "'${GNUSED}' is NOT GNU sed, exiting!"
+    exit 1
+fi
+if check4gsed "${BSDSED}"
+then
+    echo "'${BSDSED}' is NOT BSD sed, exiting!"
+    exit 1
+else
+    echo "BSD sed (or at least not GNU sed) found at '${BSDSED}', proceeding."
+fi
+
+echo
+
+for file in $(dirname "${0}")/certs/*.sclient_out
+do
+    echo -e "${CERT_COLOUR}${file%.sclient_out}${NO_COLOUR}:"
+    echo -ne "${SSL_COLOUR}libressl${NO_COLOUR}:"
+    issuerline="$(cat "${file}" | ${LIBRESSL} x509 -noout -issuer)"
+    echo "${issuerline}"
+    echo -n "GNU sed 1: "
+    issuer_gnused1 "${issuerline}"
+    echo -n "BSD sed 1: "
+    issuer_bsdsed1 "${issuerline}"
+    echo -n "GNU sed 2: "
+    issuer_gnused2 "${issuerline}"
+    echo -n "BSD sed 2: "
+    issuer_bsdsed2 "${issuerline}"
+    echo -n "Neutral: "
+    issuer_neutralsed "${issuerline}"
+    echo -ne "${SSL_COLOUR}openssl${NO_COLOUR}:"
+    issuerline="$(cat "${file}" | ${OPENSSL}  x509 -noout -issuer)"
+    echo "${issuerline}"
+    echo -n "GNU sed 1: "
+    issuer_gnused1 "${issuerline}"
+    echo -n "BSD sed 1: "
+    issuer_bsdsed1 "${issuerline}"
+    echo -n "GNU sed 2: "
+    issuer_gnused2 "${issuerline}"
+    echo -n "BSD sed 2: "
+    issuer_bsdsed2 "${issuerline}"
+    echo -n "Neutral: "
+    issuer_neutralsed "${issuerline}"
+done
+

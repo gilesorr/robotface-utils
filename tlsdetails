@@ -45,10 +45,6 @@ EOF
 #                       Utility Functions
 ######################################################################
 
-issuer() {
-    echo "${1}" | ${OPENSSL} x509 -noout -issuer | awk -F "=" '{ print $4 }' | sed -e 's@/.*@@' | sed -e 's/^ *//'
-}
-
 tlsversions() {
     successful=""
     failed=""
@@ -207,7 +203,7 @@ else
         fi
 
         echo "Expiry Date:    $(certexpirydate "${sclient_out}") ($(certdaystoexpiry "${sclient_out}") days)"
-        echo "Issuer:         $(issuer "${sclient_out}")"
+        echo "Issuer:         $(certissuer "${sclient_out}")"
         echo "TLS Versions:   $(tlsversions "${domain_name}")"
         echo "HTTP Version:   $(httpversion "${domain_name}")"
     fi

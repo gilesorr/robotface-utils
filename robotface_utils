@@ -59,23 +59,30 @@ certexpirydate() {
 # of the certificate issuer.
 
 certissuer () {
-    # I apologize if this makes you cringe.  I'm not happy with it either.
-    # We need to get the "issuer" line from the certificate, and then break
-    # that line up based on commas ... but only if the commas aren't inside
-    # double quotes (read
-    # https://stackoverflow.com/questions/13475535/replace-every-comma-not-enclosed-in-a-pair-of-double-quotes-with
-    # ).  This put the pieces on separate lines, and we look for " O =
-    # ...", which means we need the second item if we use awk to break the
-    # line on the equals signs.  Finally strip leading and trailing
-    # whitespace.
-    issuer="$(echo    "${1}" \
-        | ${OPENSSL} x509 -noout -issuer \
-        | sed -e ':a;s/^\(\("[^"]*"\|[^",]*\)*\),/\1\n/;ta' \
-        | grep "^ *O *= *" \
-        | awk -F'=' '{ print $2 }' \
-        | sed -e 's/ *\(.*\) */\1/' \
-        )"
-    echo "${issuer}"
+    # This accepts a single string which is the contents of
+    #       openssl s_client -connect \$url:443 -servername $url 2>/dev/null
+    #
+    # From here things get a bit ugly, as OpenSSL and LibreSSL spit out
+    # significantly differently formatted issuer lines.  We massage the
+    # output we receive so that both types end up similar enough to each
+    # other that we can extract the results we want ... all the time only
+    # using the simplest 'sed' commands because Macs have BSD sed and
+    # Linux has GNU sed, which also behave very differently when you
+    # start getting into the weeds ...
+
+    issuerline="$(echo "${1}" | ${OPENSSL} x509 -noout -issuer)"
+    # remove "issuer=" from the start of the line,
+    # then remove the spaces around the equals signs (if they exist):
+    compressedline="$(echo "${issuerline#issuer=}" | sed -e 's/ =/=/g' -e 's/= /=/g')"
+    # if LibreSSL, there's still a leading slash - let's lose that:
+    tmp="${compressedline%/}"
+    # now split on [/,][A-Z]+= retaining the ([A-Z]+=) onto separate lines:
+    splits="$(echo "${tmp}" | sed -e 's_[/,] *\([A-Z][A-Z]*=\)_\n\1_g')"
+    # finally capture the only thing we want, the text that starts with
+    # "O=...":
+    theO="$(echo "${splits}" | grep "^O=" | sed -e 's/^O=//')"
+    # send back our hard-earned result:
+    echo "${theO}"
 }
 
 ######################################################################
