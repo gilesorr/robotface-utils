@@ -69,7 +69,8 @@ Some notes on how this is done (incomplete at this point):
 
 2023-04-28: `tlsdetails www.google.ca` on Linux shows TLS 1.0 and TLS 1.1
 as unavailable, although they are available.  This problem doesn't exist on
-Mac.  To be worked on later ...
+Mac.  This bug dates back to the earliest version, so reverting code won't
+help.  To be worked on later ...
 
 ## Naming
 
