@@ -44,13 +44,17 @@ EOF
 ######################################################################
 #                       Utility Functions
 ######################################################################
+# as of 2023-04, neither OpenSSL nor LibreSSL support ssl2 or ssl3 although
+# the OpenSSL man page still claims to support the '-ssl3' option (it will
+# fail at the command line).
 
 tlsversions() {
     successful=""
     failed=""
-    for tlsversion in ssl2 ssl3 tls1 tls1_1 tls1_2 tls1_3
+    for tlsversion in tls1 tls1_1 tls1_2 tls1_3
     do
-        if echo | ${OPENSSL} s_client -connect "${1}":443 -${tlsversion} > /dev/null 2> /dev/null
+        # LibreSSL requires '-servername' here, OpenSSL can work without.
+        if echo | ${OPENSSL} s_client -connect "${1}":443 -${tlsversion} -servername "${1}" > /dev/null 2> /dev/null
         then
             successful="${tlsversion} ${successful}"
         else
@@ -63,12 +67,16 @@ tlsversions() {
 httpversion() {
     # This 'curl' command returns nothing but a number: '1.1' for most
     # connections, but '2' for HTTP2 sites - and '0' for https:// requests
-    # on an unencrypted site.
+    # on an unencrypted site.  '0' is a wrong answer, so we do a bit of
+    # juggling to return the right value: if the site is encrypted, we want
+    # to return the http version for the encrypted site, so we have to test
+    # both to check for both conditions.
     unEncNum=$(curl -sI         "${1}" -o/dev/null -w '%{http_version}')
     EncNum=$(curl   -sI "https://${1}" -o/dev/null -w '%{http_version}')
     # since possible return values of EncNum include '1.1', which isn't a
-    # valid number in Bash, this is a string comparison:
-    if [ "${EncNum}" -eq "0" ]
+    # valid number in Bash, this is a string comparison (that's "==" not
+    # '-eq'!!):
+    if [ "${EncNum}" == "0" ]
     then
         echo "${unEncNum}"
     else
