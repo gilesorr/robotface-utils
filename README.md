@@ -20,6 +20,16 @@ Debian, occasionally Fedora).  Some commits I think are innocuous may be
 made with incomplete testing, but generally this should run fine on any of
 these platforms.
 
+I'm attempting to support both Linux's OpenSSL Project `openssl` and Mac's
+LibreSSL `openssl` binaries, and likewise Linux's GNU `sed` and Mac's BSD
+`sed`.  They behave identically on rudimentary commands, but when you start
+getting into the weeds (and as I add features to this project I'm
+definitely getting into the weeds ...) it may become very difficult to
+support both.  Detection and separate behaviours for each binary is
+possible, but two different `openssl` output layouts being piped into two
+different `sed` binaries is already four possible outcomes to deal with ...
+we'll see how it goes.
+
 Please use tagged releases: they're generally better tested.
 
 ## chkcertexpiry
