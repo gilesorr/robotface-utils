@@ -44,13 +44,17 @@ EOF
 ######################################################################
 #                       Utility Functions
 ######################################################################
+# With Mac's system 'openssl' (Ventura, 2023-04), 'ssl3' isn't actually an
+# option and so will always fail.  'ssl3' is still listed in the man page
+# for the OpenSSL Project 'openssl' binary (1.1.1n, 2023-04), but doesn't
+# appear to be supported by it either.  Neither supports 'ssl2' anymore.
 
 tlsversions() {
     successful=""
     failed=""
-    for tlsversion in ssl2 ssl3 tls1 tls1_1 tls1_2 tls1_3
+    for tlsversion in ssl3 tls1 tls1_1 tls1_2 tls1_3
     do
-        if echo | ${OPENSSL} s_client -connect "${1}":443 -${tlsversion} > /dev/null 2> /dev/null
+        if echo | ${OPENSSL} s_client -connect "${1}":443 -${tlsversion} -servername "${1}" > /dev/null 2> /dev/null
         then
             successful="${tlsversion} ${successful}"
         else
