@@ -63,12 +63,16 @@ tlsversions() {
 httpversion() {
     # This 'curl' command returns nothing but a number: '1.1' for most
     # connections, but '2' for HTTP2 sites - and '0' for https:// requests
-    # on an unencrypted site.
+    # on an unencrypted site.  '0' is a wrong answer, so we do a bit of
+    # juggling to return the right value: if the site is encrypted, we want
+    # to return the http version for the encrypted site, so we have to test
+    # both to check for both conditions.
     unEncNum=$(curl -sI         "${1}" -o/dev/null -w '%{http_version}')
     EncNum=$(curl   -sI "https://${1}" -o/dev/null -w '%{http_version}')
     # since possible return values of EncNum include '1.1', which isn't a
-    # valid number in Bash, this is a string comparison:
-    if [ "${EncNum}" -eq "0" ]
+    # valid number in Bash, this is a string comparison (that's "==" not
+    # '-eq'!!):
+    if [ "${EncNum}" == "0" ]
     then
         echo "${unEncNum}"
     else

@@ -15,11 +15,15 @@ These should be run both on Linux (usually Debian stable in my case) and macOS (
 | `./chkcertexpiry -t tests/urls.txt -n 120` | info about certificates, more colour-highlighted to show expiry                              |
 | `./chkcertexpiry -i -s -t tests/urls.txt`  | info about certificates, internal and external URL lists                                     |
 
-| `tlsdetails` Test               | Expected Result                                                                    |
-| -----                           | --------                                                                           |
-| `./tlsdetails`                  | Help output                                                                        |
-| `./tlsdetails -h`               | Help output                                                                        |
-| `./tlsdetails -v`               | version information                                                                |
-| `./tlsdetails www.google.ca`    | info about www.google.ca connection and certificate                                |
-| `./tlsdetails -s www.google.ca` | info about www.google.ca connection and certificate (as above but no OpenSSL info) |
+| `tlsdetails` Test                              | Expected Result                                                                    |
+| -----                                          | --------                                                                           |
+| `./tlsdetails`                                 | Help output                                                                        |
+| `./tlsdetails -h`                              | Help output                                                                        |
+| `./tlsdetails -s`                              | Help output, with "needs a hostname" error first                                   |
+| `./tlsdetails -v`                              | version information                                                                |
+| `./tlsdetails www.google.ca`                   | info about www.google.ca connection and certificate                                |
+| `./tlsdetails -s www.google.ca`                | info about www.google.ca connection and certificate (as above but no OpenSSL info) |
+| `./tlsdetails -s www.escomposlinux.org`        | known (2023-04: they're getting rarer) available unencrypted site                  |
+
+<!-- another available unencrypted site (2023-04) is mjr.towers.org.uk -->
 
