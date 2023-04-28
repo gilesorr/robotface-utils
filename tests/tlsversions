@@ -12,6 +12,7 @@
 # helped me get there.
 
 B_RED="\033[1;31m"
+# shellcheck disable=SC2034  # appears unused
 B_GREEN="\033[1;32m"
 B_YELLOW="\033[1;33m"
 NO_COLOUR="\033[0;0m"
@@ -23,7 +24,7 @@ declare -a urls=(
     "secure.newegg.ca"
     "newegg.ca"
     "gilesorr.com"
-    "tpl.ca"
+    "www.google.ca"
 )
 
 OPENOPENSSL="/opt/homebrew/opt/openssl@1.1/bin/openssl"
@@ -43,15 +44,17 @@ tlsversions() {
     # tlsdetails.
     successful=""
     failed=""
-    for tlsversion in ssl3 tls1 tls1_1 tls1_2 tls1_3
+    for tlsversion in tls1 tls1_1 tls1_2 tls1_3
     do
-        echo -en "${TLS_COLOUR}${tlsversion}${NO_COLOUR}:" > $(tty)
+        echo -en "${TLS_COLOUR}${tlsversion}${NO_COLOUR}:" > "$(tty)"
         # let this spew errors on the terminal:
-        if echo | ${OPENSSL} s_client -connect "${1}":443 -${tlsversion} > /dev/null
+        echo | ${OPENSSL} s_client -connect "${1}":443 -${tlsversion} > /dev/null
+        retval=$?
+        if [ ${retval} -eq 0 ]
         then
             successful="${tlsversion} ${successful}"
         else
-            failed="${tlsversion} ${failed}"
+            failed="${tlsversion}(${retval}) ${failed}"
         fi
     done
     echo "${successful} (tried but unavailable: ${failed})"

@@ -65,6 +65,12 @@ Some notes on how this is done (incomplete at this point):
 - [Date Math](DateMath.md)
 - [Connection and Certificate Details](DissectingTheConnection.md)
 
+## Known Bug(s)
+
+2023-04-28: `tlsdetails www.google.ca` on Linux shows TLS 1.0 and TLS 1.1
+as unavailable, although they are available.  This problem doesn't exist on
+Mac.  To be worked on later ...
+
 ## Naming
 
 My initial thought was to name this repository GO-utils, but for most
