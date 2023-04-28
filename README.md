@@ -28,7 +28,8 @@ definitely getting into the weeds ...) it may become very difficult to
 support both.  Detection and separate behaviours for each binary is
 possible, but two different `openssl` output layouts being piped into two
 different `sed` binaries is already four possible outcomes to deal with ...
-we'll see how it goes.
+we'll see how it goes.  And that's before we even get into `curl` ...
+happily its behaviour seems more consistent across platforms.
 
 Please use tagged releases: they're generally better tested.
 
