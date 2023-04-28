@@ -24,6 +24,7 @@ These should be run both on Linux (usually Debian stable in my case) and macOS (
 | `./tlsdetails www.google.ca`                   | info about www.google.ca connection and certificate                                |
 | `./tlsdetails -s www.google.ca`                | info about www.google.ca connection and certificate (as above but no OpenSSL info) |
 | `./tlsdetails -s www.escomposlinux.org`        | known (2023-04: they're getting rarer) available unencrypted site                  |
+| `./tlsdetails -s newegg.ca`                    | problem domain 2023-04 for TLS version discovery (fixed now?)                      |
 
 <!-- another available unencrypted site (2023-04) is mjr.towers.org.uk -->
 
