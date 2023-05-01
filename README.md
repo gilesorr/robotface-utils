@@ -70,7 +70,17 @@ Some notes on how this is done (incomplete at this point):
 2023-04-28: `tlsdetails www.google.ca` on Linux shows TLS 1.0 and TLS 1.1
 as unavailable, although they are available.  This problem doesn't exist on
 Mac.  This bug dates back to the earliest version, so reverting code won't
-help.  To be worked on later ...
+help.  2023-05-01: Spotted this line in the error output:
+`140354186683712:error:1416D044:SSL
+routines:tls_process_key_exchange:internal
+error:../ssl/statem/statem_clnt.c:2336:`.  See
+`https://github.com/openssl/openssl/issues/19867` - it looks like this is a
+known negotiation issue with `openssl` (I hope I'm reading this right), and
+that may even mean that the readout from `tlsdetails` in this instance is
+essentially true, ie. your Linux machine probably couldn't use TLS 1 or 1.1
+with google.  That still doesn't make this _right_, but an attempt to fix
+it on my part would probably make it worse so I'm going to leave it alone
+...
 
 ## Naming
 
