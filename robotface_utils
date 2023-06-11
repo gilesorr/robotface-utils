@@ -193,6 +193,10 @@ ishostnamevalid () {
     # given a hostname, try to find the IP and use that to determine if the
     # hostname is actually valid.  Return 0 for a valid hostname, 1 for an
     # invalid hostname.
+    #
+    # 'if host <FQDN> > /dev/null ...' would do the same thing as this.
+    # It's a bit simpler, but without a strong reason to change I'm
+    # preferring this.
 
     IP="$( dig +short "${1}")"
     if [ -z "${IP}" ]

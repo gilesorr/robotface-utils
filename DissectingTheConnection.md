@@ -20,3 +20,7 @@ connection.  To drag the details out of the certificate itself:
 This dumps a lot of information about the certificate itself, including
 things like the start and end dates and the associated DNS entries.
 
+The man pages are arranged very differently between OpenSSL and LibreSSL.
+On Linux to see information about `s_client`, use `man s_client`.  On Mac
+to see information about it, use `man openssl` and then search within the
+man page for `s_client`.

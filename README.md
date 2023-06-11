@@ -1,4 +1,4 @@
-# robotface-utils - <|°_°|>
+# robotface-utils - `<|°_°|>`
 
 Website-related utility scripts.
 
