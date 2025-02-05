@@ -2,6 +2,15 @@
 
 Website-related utility scripts.
 
+## WARNING
+
+It's February 2025, and I no longer work for TPL's IT department.  I no
+longer need to bulk-check TLS certificates, and I rarely check them at all.
+As such, this software is essentially unmaintained.  I'm not archiving it
+yet, but that may yet happen.  Any maintenance will be done on Linux if it
+happens and Apple support would be dropped.  If you wish to fork and
+maintain this, please let me know (I'm in favour).
+
 ## Introduction
 
 This set of utility scripts (initially two, and a library they both use)
